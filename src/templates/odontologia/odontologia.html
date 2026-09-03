@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonrisa Clara — Clínica dental</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mint: #DCEDE3;
+            --teal: #1F4B43;
+            --coral: #F2836B;
+            --white: #FFFFFF;
+            --line: rgba(31, 75, 67, 0.14);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--teal);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.55;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .wrap {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 26px 32px;
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 21px;
+            flex-shrink: 0;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        nav a {
+            font-size: 14.5px;
+            font-weight: 500;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: var(--coral);
+            transition: width 0.25s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--teal);
+            color: var(--white);
+            padding: 11px 22px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--coral);
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            background: var(--mint);
+            border-radius: 0 0 40px 40px;
+            padding: 60px 32px 90px;
+            overflow: hidden;
+        }
+
+        .hero-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-copy {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: riseIn 0.65s ease forwards;
+            animation-delay: 0.05s;
+        }
+
+        .hero h1 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: clamp(30px, 4.6vw, 52px);
+            line-height: 1.14;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 16.5px;
+            max-width: 420px;
+            opacity: 0.78;
+            margin-bottom: 30px;
+        }
+
+        /* ---- Botones: base flexible, mobile-first friendly ---- */
+        .btn-primary,
+        .btn-outline {
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 12px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--teal);
+            color: var(--white);
+            padding: 15px 26px;
+            display: inline-block;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--coral);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -8px rgba(242, 131, 107, 0.55);
+        }
+
+        .btn-outline {
+            border: 1.5px solid var(--teal);
+            padding: 13.5px 24px;
+            margin-left: 14px;
+            display: inline-block;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            background: var(--teal);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .cont-btn {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .smile-card {
+            background: var(--white);
+            border-radius: 22px;
+            padding: 26px;
+            box-shadow: 0 20px 45px -20px rgba(31, 75, 67, 0.25);
+            opacity: 0;
+            transform: translateY(26px) scale(0.97);
+            animation: riseIn 0.7s cubic-bezier(.22, 1, .36, 1) forwards;
+            animation-delay: 0.25s;
+        }
+
+        .smile-card .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 0;
+            border-top: 1px solid var(--line);
+            opacity: 0;
+            animation: rowIn 0.5s ease forwards;
+        }
+
+        .smile-card .row:nth-child(1) {
+            border-top: none;
+            padding-top: 0;
+            animation-delay: 0.55s;
+        }
+
+        .smile-card .row:nth-child(2) {
+            animation-delay: 0.68s;
+        }
+
+        .smile-card .row:nth-child(3) {
+            animation-delay: 0.81s;
+        }
+
+        .smile-card .row:nth-child(4) {
+            animation-delay: 0.94s;
+        }
+
+        .smile-card .label {
+            font-size: 13.5px;
+            opacity: 0.6;
+        }
+
+        .smile-card .val {
+            font-weight: 600;
+            font-size: 14.5px;
+            text-align: right;
+        }
+
+        .smile-card .badge {
+            background: var(--coral);
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rowIn {
+            from {
+                opacity: 0;
+                transform: translateX(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .services {
+            padding: 80px 0;
+        }
+
+        .services-head {
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto 48px;
+        }
+
+        .services-head h2 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .services-head p {
+            font-size: 15px;
+            opacity: 0.7;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .scard {
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 28px 22px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .scard.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scard:hover {
+            border-color: var(--teal);
+            box-shadow: 0 14px 30px -18px rgba(31, 75, 67, 0.35);
+            transform: translateY(-4px);
+        }
+
+        .scard .icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--mint);
+            margin-bottom: 18px;
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+
+        .scard:hover .icon {
+            background: var(--coral);
+            transform: rotate(-6deg) scale(1.06);
+        }
+
+        .scard h3 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            font-size: 16.5px;
+            margin-bottom: 8px;
+        }
+
+        .scard p {
+            font-size: 13.5px;
+            opacity: 0.68;
+        }
+
+        .compare {
+            background: var(--teal);
+            color: var(--white);
+            padding: 80px 0;
+            border-radius: 40px;
+            margin: 20px 32px;
+        }
+
+        .compare-inner {
+            max-width: 1076px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 56px;
+        }
+
+        .compare h2 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+
+        .compare>.compare-inner>div:first-child p {
+            opacity: 0.68;
+            font-size: 14.5px;
+            max-width: 280px;
+        }
+
+        .plan-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.16);
+            opacity: 0;
+            transform: translateX(-14px);
+            transition: opacity 0.5s ease, transform 0.5s ease, padding-left 0.2s ease;
+        }
+
+        .plan-row.in-view {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .plan-row:last-child {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .plan-row:hover {
+            padding-left: 8px;
+        }
+
+        .plan-row .tname {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .plan-row .tdesc {
+            font-size: 13px;
+            opacity: 0.6;
+        }
+
+        .plan-row .tprice {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 17px;
+            white-space: nowrap;
+        }
+
+        .cta {
+            padding: 90px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: clamp(26px, 3.6vw, 38px);
+            max-width: 560px;
+            margin: 0 auto 28px;
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 32px;
+            display: flex;
+            justify-content: space-between;
+            max-width: 1140px;
+            margin: 0 auto;
+            font-size: 13px;
+            opacity: 0.6;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .cont-btn {
+            display: flex;
+            align-items: center;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .hero-copy,
+            .smile-card,
+            .smile-card .row {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .scard,
+            .plan-row {
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        /* Tablets */
+        @media (max-width:900px) {
+            nav {
+                display: none;
+            }
+
+            header {
+                padding: 22px 24px;
+            }
+
+            .hero {
+                padding: 50px 24px 70px;
+                border-radius: 0 0 28px 28px;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+
+            .hero p {
+                max-width: 100%;
+            }
+
+            .services {
+                padding: 64px 0;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .compare {
+                margin: 20px 16px;
+                padding: 56px 0;
+                border-radius: 28px;
+            }
+
+            .compare-inner {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .cta {
+                padding: 64px 0;
+            }
+        }
+
+        /* Móviles */
+        @media (max-width:600px) {
+            .wrap {
+                padding: 0 20px;
+            }
+
+            header {
+                padding: 18px 20px;
+            }
+
+            .brand {
+                font-size: 18px;
+            }
+
+            .nav-cta {
+                padding: 9px 16px;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 40px 20px 56px;
+            }
+
+            .hero p {
+                font-size: 15px;
+                margin-bottom: 26px;
+            }
+
+            /* Botones a ancho completo y apilados en mobile */
+            .cont-btn {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .btn-primary,
+            .btn-outline {
+                width: 100%;
+                white-space: normal;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+            }
+
+            .smile-card {
+                padding: 20px;
+            }
+
+            .services {
+                padding: 48px 0;
+            }
+
+            .services-head h2 {
+                font-size: 26px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .compare {
+                margin: 16px 12px;
+                padding: 44px 0;
+                border-radius: 22px;
+            }
+
+            .compare-inner {
+                padding: 0 22px;
+                gap: 26px;
+            }
+
+            .compare h2 {
+                font-size: 24px;
+            }
+
+            .plan-row {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+
+            .plan-row .tprice {
+                margin-top: 2px;
+            }
+
+            .cta {
+                padding: 48px 0;
+            }
+
+            .cta .btn-primary {
+                width: 100%;
+            }
+
+            footer {
+                padding: 24px 20px;
+                justify-content: flex-start;
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
+
+        /* Móviles muy chicos */
+        @media (max-width:380px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .brand {
+                font-size: 16px;
+            }
+
+            .nav-cta {
+                padding: 8px 12px;
+                font-size: 12.5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">Sonrisa Clara</div>
+        <nav>
+            <ul>
+                <li><a href="#">Tratamientos</a></li>
+                <li><a href="#">Planes</a></li>
+                <li><a href="#">Equipo</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="nav-cta">Reservar turno</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <h1>Odontología clara, sin sorpresas en el presupuesto.</h1>
+                <p>Diagnóstico digital, presupuesto detallado antes de empezar y seguimiento por WhatsApp durante todo
+                    el tratamiento.</p>
+                <div class="cont-btn">
+                    <a href="#" class="btn-primary">Reservar turno</a>
+                    <a href="#" class="btn-outline">Ver tratamientos</a>
+                </div>
+            </div>
+            <div class="smile-card">
+                <div class="row">
+                    <span class="label">Diagnóstico digital</span>
+                    <span class="badge">Incluido</span>
+                </div>
+                <div class="row">
+                    <span class="label">Primera consulta</span>
+                    <span class="val">Sin cargo</span>
+                </div>
+                <div class="row">
+                    <span class="label">Presupuesto</span>
+                    <span class="val">Antes de empezar</span>
+                </div>
+                <div class="row">
+                    <span class="label">Seguimiento</span>
+                    <span class="val">Por WhatsApp</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services wrap">
+        <div class="services-head">
+            <h2>Tratamientos más pedidos</h2>
+            <p>Todos empiezan con un diagnóstico digital para que sepas exactamente qué necesitás.</p>
+        </div>
+        <div class="service-grid">
+            <div class="scard">
+                <div class="icon"></div>
+                <h3>Limpieza y control</h3>
+                <p>Sesión semestral con evaluación de encías y caries tempranas.</p>
+            </div>
+            <div class="scard">
+                <div class="icon"></div>
+                <h3>Ortodoncia invisible</h3>
+                <p>Alineadores transparentes con controles cada 6 semanas.</p>
+            </div>
+            <div class="scard">
+                <div class="icon"></div>
+                <h3>Blanqueamiento</h3>
+                <p>Con luz LED en consultorio, resultados desde la primera sesión.</p>
+            </div>
+            <div class="scard">
+                <div class="icon"></div>
+                <h3>Implantes</h3>
+                <p>Planificación 3D y colocación en un solo procedimiento.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="compare">
+        <div class="compare-inner">
+            <div>
+                <h2>Planes de tratamiento</h2>
+                <p>Elegís cómo pagarlo, no cambia la calidad del trabajo.</p>
+            </div>
+            <div>
+                <div class="plan-row">
+                    <div>
+                        <div class="tname">Consulta única</div>
+                        <div class="tdesc">Diagnóstico + presupuesto, sin compromiso</div>
+                    </div>
+                    <div class="tprice">Sin cargo</div>
+                </div>
+                <div class="plan-row">
+                    <div>
+                        <div class="tname">Plan mensual</div>
+                        <div class="tdesc">Tratamiento dividido en cuotas fijas</div>
+                    </div>
+                    <div class="tprice">Desde $22.000/mes</div>
+                </div>
+                <div class="plan-row">
+                    <div>
+                        <div class="tname">Pago único</div>
+                        <div class="tdesc">10% de descuento sobre el total</div>
+                    </div>
+                    <div class="tprice">-10%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta wrap">
+        <h2>Sacá turno para tu diagnóstico digital gratuito.</h2>
+        <a href="#" class="btn-primary">Reservar ahora</a>
+    </section>
+
+    <footer>
+        <span>Sonrisa Clara — Belgrano, CABA</span>
+        <span>Turnos de lunes a sábado</span>
+    </footer>
+
+    <script>
+        (function () {
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var targets = document.querySelectorAll('.scard, .plan-row');
+
+            if (prefersReduced || !('IntersectionObserver' in window)) {
+                targets.forEach(function (el) { el.classList.add('in-view'); });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry, i) {
+                    if (entry.isIntersecting) {
+                        var delay = (i % 4) * 80;
+                        setTimeout(function () { entry.target.classList.add('in-view'); }, delay);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+
+            targets.forEach(function (el) { observer.observe(el); });
+        })();
+    </script>
+
+</body>
+
+</html>

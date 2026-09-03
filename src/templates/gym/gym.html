@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulso — Club de fitness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --indigo: #1B2A4A;
+            --coral: #FF6B4A;
+            --white: #FFFFFF;
+            --grey: #F3F4F6;
+            --line: rgba(27, 42, 74, 0.14);
+            --ok: #2F9E6E;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--indigo);
+            font-family: 'Manrope', sans-serif;
+            line-height: 1.55;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 32px;
+            max-width: 1180px;
+            margin: 0 auto;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: var(--white);
+            transition: box-shadow 0.25s ease, padding 0.25s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 6px 24px -16px rgba(27, 42, 74, 0.35);
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        .brand {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            font-size: 14.5px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--coral);
+            transition: width 0.25s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--coral);
+            color: var(--white);
+            padding: 11px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--indigo);
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            max-width: 1180px;
+            margin: 20px auto 0;
+            padding: 30px 32px 0;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-copy {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: riseIn 0.65s ease forwards;
+            animation-delay: 0.05s;
+        }
+
+        .hero .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--coral);
+        }
+
+        .hero .eyebrow .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--coral);
+            border-radius: 50%;
+            animation: pulseDot 2s ease-out infinite;
+        }
+
+        .hero h1 {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: clamp(30px, 4.6vw, 54px);
+            line-height: 1.12;
+            margin-bottom: 22px;
+        }
+
+        .hero p {
+            font-size: 16.5px;
+            max-width: 440px;
+            opacity: 0.72;
+            margin-bottom: 30px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--indigo);
+            color: var(--white);
+            padding: 15px 26px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            display: inline-block;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: #141f38;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -12px rgba(27, 42, 74, 0.5);
+        }
+
+        .btn-outline {
+            border: 1.5px solid var(--indigo);
+            padding: 13.5px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            display: inline-block;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            background: var(--indigo);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseDot {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 74, 0.55);
+            }
+
+            70% {
+                box-shadow: 0 0 0 8px rgba(255, 107, 74, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 74, 0);
+            }
+        }
+
+        .locations-card {
+            background: var(--grey);
+            border-radius: 20px;
+            padding: 28px;
+            opacity: 0;
+            transform: translateY(22px) scale(0.98);
+            animation: riseIn 0.7s cubic-bezier(.22, 1, .36, 1) forwards;
+            animation-delay: 0.25s;
+        }
+
+        .locations-card h4 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 14.5px;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .loc-row {
+            padding: 13px 0;
+            border-top: 1px solid var(--line);
+            font-size: 14px;
+        }
+
+        .loc-row:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .loc-row .top-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .loc-row .name {
+            font-weight: 600;
+        }
+
+        .loc-row .status {
+            font-weight: 700;
+            font-size: 12.5px;
+        }
+
+        .loc-row .status.low {
+            color: var(--ok);
+        }
+
+        .loc-row .status.high {
+            color: var(--coral);
+        }
+
+        .cap-track {
+            height: 5px;
+            border-radius: 4px;
+            background: rgba(27, 42, 74, 0.1);
+            overflow: hidden;
+        }
+
+        .cap-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 4px;
+            background: var(--ok);
+            transition: width 1s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .cap-fill.high {
+            background: var(--coral);
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            margin-top: 70px;
+        }
+
+        .stat {
+            background: var(--white);
+            padding: 36px 28px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .stat.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat .n {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 34px;
+            color: var(--coral);
+        }
+
+        .stat .l {
+            font-size: 13px;
+            opacity: 0.65;
+            margin-top: 6px;
+        }
+
+        .plans {
+            padding: 80px 0;
+        }
+
+        .plans-head {
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto 48px;
+        }
+
+        .plans-head h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .plans-head p {
+            font-size: 15px;
+            opacity: 0.68;
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .plan {
+            border: 1.5px solid var(--line);
+            border-radius: 18px;
+            padding: 32px 28px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .plan.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .plan:not(.featured):hover {
+            border-color: var(--indigo);
+            box-shadow: 0 16px 34px -22px rgba(27, 42, 74, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .plan.featured {
+            border-color: var(--indigo);
+            background: var(--indigo);
+            color: var(--white);
+            position: relative;
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s ease;
+        }
+
+        .plan.featured:hover {
+            box-shadow: 0 20px 40px -18px rgba(27, 42, 74, 0.55);
+            transform: translateY(-6px);
+        }
+
+        .plan .tag {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: var(--coral);
+            margin-bottom: 14px;
+        }
+
+        .plan.featured .tag {
+            color: #FFB199;
+        }
+
+        .plan h3 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .plan .price {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .plan .price span {
+            font-family: 'Manrope', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.6;
+        }
+
+        .plan ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .plan.featured ul {
+            opacity: 0.9;
+        }
+
+        .plan .btn-outline {
+            margin: 0;
+            display: block;
+            text-align: center;
+        }
+
+        .plan.featured .btn-outline {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .plan.featured .btn-outline:hover {
+            background: var(--white);
+            color: var(--indigo);
+        }
+
+        .classes {
+            background: var(--grey);
+            padding: 80px 0;
+        }
+
+        .classes .wrap {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 56px;
+        }
+
+        .classes h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 26px;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+
+        .classes>.wrap>div:first-child p {
+            opacity: 0.68;
+            font-size: 14.5px;
+            max-width: 280px;
+        }
+
+        .class-row {
+            display: grid;
+            grid-template-columns: 80px 1fr auto 80px;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 14px;
+            border-top: 1px solid var(--line);
+            opacity: 0;
+            transform: translateX(-12px);
+            transition: opacity 0.45s ease, transform 0.45s ease, background 0.2s ease, margin 0.2s ease;
+            border-radius: 10px;
+        }
+
+        .class-row.in-view {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .class-row:last-child {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .class-row.now {
+            background: var(--white);
+            box-shadow: 0 8px 22px -14px rgba(27, 42, 74, 0.3);
+        }
+
+        .class-row .time {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--coral);
+        }
+
+        .class-row .cls {
+            font-size: 14.5px;
+            font-weight: 600;
+        }
+
+        .class-row .badge {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            color: var(--coral);
+            background: rgba(255, 107, 74, 0.12);
+            padding: 4px 9px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .class-row.now .badge {
+            opacity: 1;
+        }
+
+        .class-row .room {
+            font-size: 12.5px;
+            opacity: 0.55;
+            text-align: right;
+        }
+
+        .cta {
+            padding: 90px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: clamp(26px, 3.6vw, 38px);
+            max-width: 560px;
+            margin: 0 auto 28px;
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 32px;
+            display: flex;
+            justify-content: space-between;
+            max-width: 1180px;
+            margin: 0 auto;
+            font-size: 13px;
+            opacity: 0.6;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .hero-copy,
+            .locations-card,
+            .stat,
+            .plan,
+            .class-row {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .eyebrow .dot {
+                animation: none !important;
+            }
+
+            .cap-fill {
+                transition: none !important;
+            }
+        }
+
+        @media (max-width:900px) {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+
+            .stats-bar {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .plan-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .classes .wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width:640px) {
+            header {
+                padding: 18px 20px;
+            }
+
+            .wrap {
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding: 24px 20px 0;
+                gap: 30px;
+            }
+
+            .hero p {
+                font-size: 15.5px;
+            }
+
+            .hero-actions {
+                width: 100%;
+            }
+
+            .hero-actions a {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+
+            .locations-card {
+                padding: 22px;
+            }
+
+            .stats-bar {
+                grid-template-columns: 1fr 1fr;
+                margin-top: 48px;
+            }
+
+            .stat {
+                padding: 26px 16px;
+            }
+
+            .stat .n {
+                font-size: 26px;
+            }
+
+            .plans {
+                padding: 60px 0;
+            }
+
+            .plans-head h2,
+            .cta h2 {
+                font-size: 26px;
+            }
+
+            .plan {
+                padding: 26px 22px;
+            }
+
+            .classes {
+                padding: 60px 0;
+            }
+
+            .class-row {
+                grid-template-columns: 60px 1fr 70px;
+                padding: 14px 10px;
+            }
+
+            .class-row .badge {
+                grid-column: 1 / -1;
+                justify-self: start;
+                margin-top: 4px;
+            }
+
+            .class-row .room {
+                text-align: right;
+            }
+
+            .cta {
+                padding: 64px 0;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 6px;
+                padding: 26px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="siteHeader">
+        <div class="brand">PULSO</div>
+        <nav>
+            <ul>
+                <li><a href="#">Sedes</a></li>
+                <li><a href="#">Planes</a></li>
+                <li><a href="#">Clases</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="nav-cta">Sumate ahora</a>
+    </header>
+
+    <section class="hero wrap">
+        <div class="hero-copy">
+            <div class="eyebrow"><span class="dot"></span>12 sedes en CABA y GBA</div>
+            <h1>Un gimnasio cerca tuyo, todo el tiempo que quieras.</h1>
+            <p>Acceso a las 12 sedes con un solo abono, más de 40 clases grupales por semana y app para reservar turno
+                de máquinas.</p>
+            <div class="hero-actions">
+                <a href="#" class="btn-primary">Ver planes</a>
+                <a href="#" class="btn-outline">Encontrar sede</a>
+            </div>
+        </div>
+        <div class="locations-card">
+            <h4>Sedes con lugar disponible ahora</h4>
+            <div class="loc-row">
+                <div class="top-line"><span class="name">Palermo</span><span class="status low" data-percent="42">42%
+                        ocupado</span></div>
+                <div class="cap-track">
+                    <div class="cap-fill" data-percent="42"></div>
+                </div>
+            </div>
+            <div class="loc-row">
+                <div class="top-line"><span class="name">Belgrano</span><span class="status high" data-percent="58">58%
+                        ocupado</span></div>
+                <div class="cap-track">
+                    <div class="cap-fill" data-percent="58"></div>
+                </div>
+            </div>
+            <div class="loc-row">
+                <div class="top-line"><span class="name">Caballito</span><span class="status low" data-percent="31">31%
+                        ocupado</span></div>
+                <div class="cap-track">
+                    <div class="cap-fill" data-percent="31"></div>
+                </div>
+            </div>
+            <div class="loc-row">
+                <div class="top-line"><span class="name">Vicente López</span><span class="status high"
+                        data-percent="65">65% ocupado</span></div>
+                <div class="cap-track">
+                    <div class="cap-fill" data-percent="65"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-bar wrap">
+        <div class="stat">
+            <div class="n" data-count-to="12">0</div>
+            <div class="l">sedes activas</div>
+        </div>
+        <div class="stat">
+            <div class="n" data-count-to="40" data-suffix="+">0</div>
+            <div class="l">clases por semana</div>
+        </div>
+        <div class="stat">
+            <div class="n">06-24</div>
+            <div class="l">horario diario</div>
+        </div>
+        <div class="stat">
+            <div class="n" data-count-to="9.2" data-decimals="1" data-suffix="k">0k</div>
+            <div class="l">socios activos</div>
+        </div>
+    </div>
+
+    <section class="plans wrap">
+        <div class="plans-head">
+            <h2>Elegí tu plan</h2>
+            <p>Sin permanencia mínima. Podés pausar o cancelar cuando quieras desde la app.</p>
+        </div>
+        <div class="plan-grid">
+            <div class="plan">
+                <div class="tag">Básico</div>
+                <h3>Una sede</h3>
+                <div class="price">$18.900<span>/mes</span></div>
+                <ul>
+                    <li>Acceso a tu sede elegida</li>
+                    <li>Clases grupales incluidas</li>
+                    <li>Reserva de máquinas por app</li>
+                </ul>
+                <a href="#" class="btn-outline">Elegir plan</a>
+            </div>
+            <div class="plan featured">
+                <div class="tag">Más elegido</div>
+                <h3>Full acceso</h3>
+                <div class="price">$26.900<span>/mes</span></div>
+                <ul>
+                    <li>Acceso a las 12 sedes</li>
+                    <li>Todas las clases grupales</li>
+                    <li>1 clase con personal trainer/mes</li>
+                </ul>
+                <a href="#" class="btn-outline">Elegir plan</a>
+            </div>
+            <div class="plan">
+                <div class="tag">Familiar</div>
+                <h3>Full x2</h3>
+                <div class="price">$44.900<span>/mes</span></div>
+                <ul>
+                    <li>Full acceso para 2 personas</li>
+                    <li>Casillero fijo incluido</li>
+                    <li>Descuento en nutrición</li>
+                </ul>
+                <a href="#" class="btn-outline">Elegir plan</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="classes">
+        <div class="wrap">
+            <div>
+                <h2>Clases de hoy en Palermo</h2>
+                <p>El cupo se reserva desde la app hasta 2 horas antes.</p>
+            </div>
+            <div>
+                <div class="class-row" data-time="07:00"><span class="time">07:00</span><span
+                        class="cls">Funcional</span><span class="badge">Próxima</span><span class="room">Sala 2</span>
+                </div>
+                <div class="class-row" data-time="09:00"><span class="time">09:00</span><span
+                        class="cls">Spinning</span><span class="badge">Próxima</span><span class="room">Sala 1</span>
+                </div>
+                <div class="class-row" data-time="12:30"><span class="time">12:30</span><span
+                        class="cls">Yoga</span><span class="badge">Próxima</span><span class="room">Sala 3</span></div>
+                <div class="class-row" data-time="18:00"><span class="time">18:00</span><span
+                        class="cls">HIIT</span><span class="badge">Próxima</span><span class="room">Sala 2</span></div>
+                <div class="class-row" data-time="19:30"><span class="time">19:30</span><span
+                        class="cls">Pilates</span><span class="badge">Próxima</span><span class="room">Sala 3</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta wrap">
+        <h2>Primeros 7 días sin cargo, en cualquiera de las 12 sedes.</h2>
+        <a href="#" class="btn-primary">Empezar gratis</a>
+    </section>
+
+    <footer>
+        <span>Pulso Fitness Club — 12 sedes en CABA y GBA</span>
+        <span>Abierto de 6 a 24hs</span>
+    </footer>
+
+    <script>
+        (function () {
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // --- Sombra de header al hacer scroll ---
+            var header = document.getElementById('siteHeader');
+            function onScroll() {
+                header.classList.toggle('scrolled', window.scrollY > 8);
+            }
+            onScroll();
+            window.addEventListener('scroll', onScroll, { passive: true });
+
+            // --- Barras de ocupación (fill al entrar en vista) ---
+            var caps = document.querySelectorAll('.cap-fill');
+            function paintCaps() {
+                caps.forEach(function (el) {
+                    var pct = el.getAttribute('data-percent');
+                    if (pct > 55) el.classList.add('high');
+                    if (prefersReduced) { el.style.width = pct + '%'; }
+                });
+            }
+            paintCaps();
+            if (!prefersReduced) {
+                var capObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.style.width = entry.target.getAttribute('data-percent') + '%';
+                            capObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.4 });
+                caps.forEach(function (el) { capObserver.observe(el); });
+            }
+
+            // --- Marcar próxima clase según hora actual ---
+            var rows = document.querySelectorAll('.class-row[data-time]');
+            var now = new Date();
+            var nowMins = now.getHours() * 60 + now.getMinutes();
+            var upcoming = null;
+            rows.forEach(function (row) {
+                var parts = row.getAttribute('data-time').split(':');
+                var mins = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+                if (mins >= nowMins && (upcoming === null || mins < upcoming.mins)) {
+                    upcoming = { row: row, mins: mins };
+                }
+            });
+            if (upcoming) {
+                upcoming.row.classList.add('now');
+            } else {
+                var badge = document.querySelector('.class-row .badge');
+                if (badge) badge.remove();
+            }
+
+            // --- Contador de stats ---
+            var counters = document.querySelectorAll('[data-count-to]');
+            function animateCounter(el) {
+                var target = parseFloat(el.getAttribute('data-count-to'));
+                var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+                var suffix = el.getAttribute('data-suffix') || '';
+                if (prefersReduced) {
+                    el.textContent = target.toFixed(decimals) + suffix;
+                    return;
+                }
+                var duration = 1100;
+                var start = null;
+                function step(ts) {
+                    if (!start) start = ts;
+                    var progress = Math.min((ts - start) / duration, 1);
+                    var eased = 1 - Math.pow(1 - progress, 3);
+                    var value = target * eased;
+                    el.textContent = value.toFixed(decimals) + suffix;
+                    if (progress < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+
+            var statEls = document.querySelectorAll('.stat');
+            if (prefersReduced || !('IntersectionObserver' in window)) {
+                statEls.forEach(function (el) { el.classList.add('in-view'); });
+                counters.forEach(animateCounter);
+            } else {
+                var statObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry, i) {
+                        if (entry.isIntersecting) {
+                            var delay = i * 90;
+                            setTimeout(function () {
+                                entry.target.classList.add('in-view');
+                                var counter = entry.target.querySelector('[data-count-to]');
+                                if (counter) animateCounter(counter);
+                            }, delay);
+                            statObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                statEls.forEach(function (el) { statObserver.observe(el); });
+            }
+
+            // --- Scroll reveal genérico (planes y clases) ---
+            var revealTargets = document.querySelectorAll('.plan, .class-row');
+            if (prefersReduced || !('IntersectionObserver' in window)) {
+                revealTargets.forEach(function (el) { el.classList.add('in-view'); });
+            } else {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry, i) {
+                        if (entry.isIntersecting) {
+                            var delay = (i % 5) * 80;
+                            setTimeout(function () { entry.target.classList.add('in-view'); }, delay);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+                revealTargets.forEach(function (el) { observer.observe(el); });
+            }
+        })();
+    </script>
+
+</body>
+
+</html>

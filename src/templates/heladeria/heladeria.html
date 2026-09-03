@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomelo — Heladería artesanal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            --frutilla: #ff5c5c;
+            --pistacho: #7cb96f;
+            --limon: #ffcb3d;
+            --uva: #6b4ba3;
+            --crema: #fff6ea;
+            --tinta: #23201d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--crema);
+            color: var(--tinta);
+            font-family: 'Work Sans', sans-serif;
+            line-height: 1.55;
+        }
+
+        .display {
+            font-family: 'Bungee', sans-serif;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 5vw;
+        }
+
+        .brand {
+            font-family: 'Bungee', sans-serif;
+            font-size: 22px;
+            color: var(--frutilla);
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 28px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .navlinks a:hover {
+            color: var(--frutilla);
+        }
+
+        .nav-cta {
+            background: var(--tinta);
+            color: var(--crema);
+            padding: 11px 22px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .nav-cta:hover {
+            background: var(--frutilla);
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 40px 5vw 0;
+        }
+
+        .stripes {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: repeating-linear-gradient(-8deg, var(--limon) 0 60px, #ffd85e 60px 120px);
+            opacity: 0.35;
+            mask-image: linear-gradient(to bottom, black, transparent);
+        }
+
+        .hero-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            align-items: center;
+            padding-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 76px);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .c1 {
+            color: var(--frutilla);
+        }
+
+        .hero h1 .c2 {
+            color: var(--pistacho);
+        }
+
+        .hero h1 .c3 {
+            color: var(--uva);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 420px;
+            margin-bottom: 30px;
+            color: #4a453e;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--frutilla);
+            color: #fff;
+            padding: 16px 30px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 15px;
+            display: inline-block;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--uva);
+            transform: translateY(-2px);
+        }
+
+        .btn-text {
+            font-weight: 700;
+            font-size: 15px;
+            border-bottom: 3px solid var(--pistacho);
+            padding-bottom: 2px;
+        }
+
+        .scoops {
+            position: relative;
+            height: 340px;
+        }
+
+        .scoop {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Bungee', sans-serif;
+            color: #fff;
+            font-size: 13px;
+            padding: 10px;
+            box-shadow: 6px 6px 0 rgba(35, 32, 29, 0.15);
+            opacity: 0;
+            transform: translateY(40px) scale(0.7);
+            animation: dropIn 0.7s cubic-bezier(.34, 1.56, .64, 1) forwards;
+        }
+
+        .s1 {
+            width: 170px;
+            height: 170px;
+            background: var(--frutilla);
+            top: 0;
+            left: 60px;
+            animation-delay: 0.15s;
+        }
+
+        .s2 {
+            width: 150px;
+            height: 150px;
+            background: var(--pistacho);
+            top: 100px;
+            left: 220px;
+            animation-delay: 0.4s;
+        }
+
+        .s3 {
+            width: 130px;
+            height: 130px;
+            background: var(--uva);
+            top: 210px;
+            left: 90px;
+            animation-delay: 0.65s;
+        }
+
+        @keyframes dropIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* SABORES marquee */
+        .strip {
+            background: var(--tinta);
+            color: var(--crema);
+            padding: 18px 0;
+            overflow: hidden;
+        }
+
+        .strip-track {
+            display: flex;
+            gap: 50px;
+            white-space: nowrap;
+            width: max-content;
+            font-family: 'Bungee', sans-serif;
+            font-size: 16px;
+            animation: scroll 24s linear infinite;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* SABORES grid */
+        .sabores {
+            padding: 90px 5vw;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .sabores-head {
+            text-align: center;
+            max-width: 560px;
+            margin: 0 auto 50px;
+        }
+
+        .sabores-head h2 {
+            font-size: clamp(30px, 3.8vw, 44px);
+            margin-bottom: 14px;
+        }
+
+        .sabores-head p {
+            color: #4a453e;
+            font-size: 16px;
+        }
+
+        .sabor-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        .sabor-card {
+            text-align: center;
+            padding: 24px 10px;
+            border: 3px solid var(--tinta);
+            border-radius: 50% 50% 12px 12px;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+
+        .sabor-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sabor-card:nth-child(1) {
+            background: #ffe1e1;
+        }
+
+        .sabor-card:nth-child(2) {
+            background: #ffe9c2;
+        }
+
+        .sabor-card:nth-child(3) {
+            background: #dcefd4;
+        }
+
+        .sabor-card:nth-child(4) {
+            background: #e6ddf5;
+        }
+
+        .sabor-card:nth-child(5) {
+            background: #fff2c8;
+        }
+
+        .sabor-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sabor-card p {
+            font-size: 12px;
+            color: #5c574f;
+        }
+
+        /* COMO LLEGAR */
+        .llegar {
+            padding: 90px 5vw;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .llegar-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 44px;
+        }
+
+        .llegar-head h2 {
+            font-size: clamp(30px, 3.8vw, 44px);
+            max-width: 480px;
+        }
+
+        .llegar-head p {
+            color: #4a453e;
+            font-size: 15px;
+            max-width: 320px;
+        }
+
+        .loc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .loc-card {
+            border: 3px solid var(--tinta);
+            border-radius: 22px;
+            overflow: hidden;
+            background: #fff;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.2s ease;
+        }
+
+        .loc-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .loc-card:hover {
+            box-shadow: 8px 8px 0 rgba(35, 32, 29, 0.12);
+        }
+
+        .loc-map {
+            height: 130px;
+            position: relative;
+        }
+
+        .loc-card:nth-child(1) .loc-map {
+            background: #ffe1e1;
+        }
+
+        .loc-card:nth-child(2) .loc-map {
+            background: #dcefd4;
+        }
+
+        .loc-card:nth-child(3) .loc-map {
+            background: #e6ddf5;
+        }
+
+        .loc-map svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .loc-body {
+            padding: 20px;
+        }
+
+        .loc-body .n {
+            font-family: 'Bungee', sans-serif;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .loc-body .addr {
+            font-size: 14px;
+            color: #4a453e;
+            margin-bottom: 4px;
+        }
+
+        .loc-body .h {
+            font-size: 13px;
+            color: #7c766b;
+            margin-bottom: 16px;
+        }
+
+        .loc-go {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            border-bottom: 3px solid var(--frutilla);
+            padding-bottom: 2px;
+        }
+
+        .loc-go svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* LOCALES / horarios resumen */
+        .locales {
+            background: var(--uva);
+            color: #fff;
+            padding: 90px 5vw;
+            border-radius: 40px;
+            max-width: 1180px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .locales h2 {
+            font-family: 'Bungee', sans-serif;
+            font-size: clamp(26px, 3.4vw, 38px);
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+
+        .locales p {
+            opacity: 0.9;
+            font-size: 15px;
+            max-width: 400px;
+            margin-bottom: 24px;
+        }
+
+        .locales .btn-primary:hover {
+            background: var(--limon);
+            color: var(--tinta);
+        }
+
+        .loc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .loc-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            padding-bottom: 14px;
+        }
+
+        .loc-item .n {
+            font-weight: 700;
+        }
+
+        .loc-item .h {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 90px 5vw;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: clamp(32px, 5vw, 52px);
+            margin-bottom: 18px;
+        }
+
+        .cta p {
+            color: #4a453e;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        footer {
+            border-top: 3px solid var(--tinta);
+            padding: 28px 5vw;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .strip-track,
+            .scoop {
+                animation: none !important;
+            }
+
+            .scoop {
+                opacity: 1;
+                transform: none;
+            }
+
+            .sabor-card,
+            .loc-card {
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        @media (max-width: 860px) {
+            .navlinks {
+                display: none;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .scoops {
+                height: 260px;
+            }
+
+            .sabor-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .locales {
+                grid-template-columns: 1fr;
+                padding: 50px 26px;
+                border-radius: 26px;
+            }
+
+            .loc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .llegar-head {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="brand">POMELO</div>
+        <div class="navlinks">
+            <a href="#sabores">Sabores</a>
+            <a href="#llegar">Cómo llegar</a>
+            <a href="#">Delivery</a>
+        </div>
+        <a href="#" class="nav-cta">Pedir ahora</a>
+    </nav>
+
+    <section class="hero">
+        <div class="stripes"></div>
+        <div class="hero-inner">
+            <div>
+                <h1 class="display"><span class="c1">HELADO</span><br>DE <span class="c2">VER</span><span
+                        class="c3">DAD</span><br></h1>
+                <p>Fruta de estación, leche de tambo y cero saborizantes. Treinta sabores, y ninguno viene de un sobre.
+                </p>
+                <div class="hero-actions">
+                    <a href="#" class="btn-primary">Pedir delivery</a>
+                    <a href="#sabores" class="btn-text">Ver los 30 sabores</a>
+                </div>
+            </div>
+            <div class="scoops">
+                <div class="scoop s1">Frutilla<br>a la crema</div>
+                <div class="scoop s2">Pistacho</div>
+                <div class="scoop s3">Dulce<br>de leche</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="strip">
+        <div class="strip-track">
+            <span>FRUTILLA</span><span>PISTACHO</span><span>DULCE DE LECHE</span><span>LIMÓN</span><span>CHOCOLATE
+                70%</span><span>FRUTILLA</span><span>PISTACHO</span><span>DULCE DE
+                LECHE</span><span>LIMÓN</span><span>CHOCOLATE 70%</span>
+        </div>
+    </div>
+
+    <section class="sabores" id="sabores">
+        <div class="sabores-head">
+            <h2>Los cinco que más se piden esta semana.</h2>
+            <p>La carta completa cambia según lo que llega fresco del mercado.</p>
+        </div>
+        <div class="sabor-grid">
+            <div class="sabor-card">
+                <h4>Frutilla a la crema</h4>
+                <p>Fruta de estación</p>
+            </div>
+            <div class="sabor-card">
+                <h4>Dulce de leche</h4>
+                <p>Repostero, bien espeso</p>
+            </div>
+            <div class="sabor-card">
+                <h4>Pistacho</h4>
+                <p>Sin colorante</p>
+            </div>
+            <div class="sabor-card">
+                <h4>Limón</h4>
+                <p>Al agua, bien cítrico</p>
+            </div>
+            <div class="sabor-card">
+                <h4>Chocolate 70%</h4>
+                <p>Cacao de origen único</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="llegar" id="llegar">
+        <div class="llegar-head">
+            <h2>Encontranos. Está más cerca de lo que pensás.</h2>
+            <p>Tocá un local para abrir la ruta en Google Maps desde donde estés.</p>
+        </div>
+        <div class="loc-grid">
+            <a class="loc-card"
+                href="https://www.google.com/maps/dir/?api=1&destination=Heladeria+Pomelo+Palermo+Buenos+Aires"
+                target="_blank" rel="noopener">
+                <div class="loc-map">
+                    <svg viewBox="0 0 300 130" preserveAspectRatio="none">
+                        <line x1="0" y1="30" x2="300" y2="30" stroke="#23201d" stroke-width="2" stroke-opacity="0.25" />
+                        <line x1="0" y1="95" x2="300" y2="95" stroke="#23201d" stroke-width="2" stroke-opacity="0.25" />
+                        <line x1="90" y1="0" x2="90" y2="130" stroke="#23201d" stroke-width="2" stroke-opacity="0.2" />
+                        <line x1="220" y1="0" x2="220" y2="130" stroke="#23201d" stroke-width="2"
+                            stroke-opacity="0.2" />
+                        <circle cx="150" cy="60" r="9" fill="#ff5c5c" stroke="#23201d" stroke-width="2" />
+                        <circle cx="150" cy="60" r="3" fill="#fff" />
+                    </svg>
+                </div>
+                <div class="loc-body">
+                    <div class="n">Palermo</div>
+                    <div class="addr">Av. Costa Rica 4890</div>
+                    <div class="h">12 a 00 hs</div>
+                    <span class="loc-go">Cómo llegar
+
+                    </span>
+                </div>
+            </a>
+            <a class="loc-card"
+                href="https://www.google.com/maps/dir/?api=1&destination=Heladeria+Pomelo+Belgrano+Buenos+Aires"
+                target="_blank" rel="noopener">
+                <div class="loc-map">
+                    <svg viewBox="0 0 300 130" preserveAspectRatio="none">
+                        <line x1="0" y1="45" x2="300" y2="45" stroke="#23201d" stroke-width="2" stroke-opacity="0.25" />
+                        <line x1="0" y1="100" x2="300" y2="100" stroke="#23201d" stroke-width="2"
+                            stroke-opacity="0.25" />
+                        <line x1="60" y1="0" x2="60" y2="130" stroke="#23201d" stroke-width="2" stroke-opacity="0.2" />
+                        <line x1="200" y1="0" x2="200" y2="130" stroke="#23201d" stroke-width="2"
+                            stroke-opacity="0.2" />
+                        <circle cx="130" cy="65" r="9" fill="#7cb96f" stroke="#23201d" stroke-width="2" />
+                        <circle cx="130" cy="65" r="3" fill="#fff" />
+                    </svg>
+                </div>
+                <div class="loc-body">
+                    <div class="n">Belgrano</div>
+                    <div class="addr">Av. Cabildo 2140</div>
+                    <div class="h">12 a 23 hs</div>
+                    <span class="loc-go">Cómo llegar
+                      
+                    </span>
+                </div>
+            </a>
+            <a class="loc-card"
+                href="https://www.google.com/maps/dir/?api=1&destination=Heladeria+Pomelo+Caballito+Buenos+Aires"
+                target="_blank" rel="noopener">
+                <div class="loc-map">
+                    <svg viewBox="0 0 300 130" preserveAspectRatio="none">
+                        <line x1="0" y1="35" x2="300" y2="35" stroke="#23201d" stroke-width="2" stroke-opacity="0.25" />
+                        <line x1="0" y1="90" x2="300" y2="90" stroke="#23201d" stroke-width="2" stroke-opacity="0.25" />
+                        <line x1="110" y1="0" x2="110" y2="130" stroke="#23201d" stroke-width="2"
+                            stroke-opacity="0.2" />
+                        <line x1="240" y1="0" x2="240" y2="130" stroke="#23201d" stroke-width="2"
+                            stroke-opacity="0.2" />
+                        <circle cx="170" cy="55" r="9" fill="#6b4ba3" stroke="#23201d" stroke-width="2" />
+                        <circle cx="170" cy="55" r="3" fill="#fff" />
+                    </svg>
+                </div>
+                <div class="loc-body">
+                    <div class="n">Caballito</div>
+                    <div class="addr">Av. Rivadavia 5230</div>
+                    <div class="h">13 a 22 hs</div>
+                    <span class="loc-go">Cómo llegar
+                  
+                    </span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="locales" id="locales">
+        <div>
+            <h2>Tres locales abiertos todos los días del año.</h2>
+            <p>Y si no llegás, te lo llevamos en menos de cuarenta minutos.</p>
+            <a href="#" class="btn-primary">Ver el menú completo</a>
+        </div>
+        <div class="loc-list">
+            <div class="loc-item"><span class="n">Palermo</span><span class="h">12 a 00 hs</span></div>
+            <div class="loc-item"><span class="n">Belgrano</span><span class="h">12 a 23 hs</span></div>
+            <div class="loc-item"><span class="n">Caballito</span><span class="h">13 a 22 hs</span></div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>¿Ya elegiste el sabor de hoy?</h2>
+        <p>Pedilo por delivery o pasá directo por el local más cercano.</p>
+        <a href="#" class="btn-primary">Pedir delivery</a>
+    </section>
+
+    <footer>
+        <div>Pomelo — Heladería artesanal</div>
+        <div>Buenos Aires</div>
+    </footer>
+
+    <script>
+        (function () {
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var targets = document.querySelectorAll('.sabor-card, .loc-card');
+
+            if (prefersReduced || !('IntersectionObserver' in window)) {
+                targets.forEach(function (el) { el.classList.add('in-view'); });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry, i) {
+                    if (entry.isIntersecting) {
+                        var delay = (i % 5) * 70;
+                        setTimeout(function () {
+                            entry.target.classList.add('in-view');
+                        }, delay);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+
+            targets.forEach(function (el) { observer.observe(el); });
+        })();
+    </script>
+
+</body>
+
+</html>
