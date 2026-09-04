@@ -51,7 +51,7 @@ export const projects = [
             "Supabase",
             "UI"
         ],
-        "link": "#"
+        "link": "https://evently-azure-six.vercel.app"
     },
 
 ];
