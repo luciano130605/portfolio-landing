@@ -74,7 +74,7 @@ export const templates = [
     {
         index: "03",
         name: "hamburguesería",
-        category: "Gastronomía · Website",
+        category: "Gastronomía · Landing page",
         image: "/templates/burger/burger.png",
         link: "https://demo-burger-nine.vercel.app/"
     },
