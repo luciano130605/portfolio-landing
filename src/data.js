@@ -73,10 +73,10 @@ export const templates = [
     },
     {
         index: "03",
-        name: "Parrilla",
+        name: "hamburguesería",
         category: "Gastronomía · Landing page",
-        image: "/templates/parrilla/parrilla.png",
-        link: "/templates/parrilla/parrilla.html"
+        image: "/templates/burger/burger.png",
+        link: "https://demo-burger-nine.vercel.app/"
     },
     {
         index: "04",
@@ -86,11 +86,18 @@ export const templates = [
         link: "/templates/gym/gym.html"
     },
     {
-        index: "04",
+        index: "05",
         name: "Cafetería",
         category: "Gastronomía  · Landing page",
         image: "/templates/cafeteria/cafeteria.png",
         link: "/templates/cafeteria/cafeteria.html"
+    },
+    {
+        index: "07",
+        name: "Parrilla",
+        category: "Gastronomía · Landing page",
+        image: "/templates/parrilla/parrilla.png",
+        link: "/templates/parrilla/parrilla.html"
     },
 ];
 
