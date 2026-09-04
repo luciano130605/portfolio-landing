@@ -97,15 +97,9 @@ export const templates = [
         name: "Parrilla",
         category: "Gastronomía · Landing page",
         image: "/templates/parrilla/parrilla.png",
-        link: "/templates/parrilla/parrilla.html"
+        link: "https://demo-parrilla.vercel.app/"
     },
-  //  {
-        //index: "07",
-        //name: "Empanadas",
-        //category: "Gastronomía · Website",
-        //image: "/templates/empas/empas.png",
-        //link: "https://demo-empas.vercel.app/"
-    //},
+
 ];
 
 
