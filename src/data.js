@@ -84,7 +84,14 @@ export const templates = [
         category: "Fitness  · Landing page",
         image: "/templates/gym/gym.png",
         link: "/templates/gym/gym.html"
-    }
+    },
+    {
+        index: "04",
+        name: "Cafetería",
+        category: "Gastronomía  · Landing page",
+        image: "/templates/cafeteria/cafeteria.png",
+        link: "/templates/cafeteria/cafeteria.html"
+    },
 ];
 
 

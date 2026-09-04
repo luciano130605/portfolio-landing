@@ -165,6 +165,23 @@ section {
     align-items: center;
     gap: 10px;
     margin-bottom: 18px;
+    justify-content: space-between;
+}
+
+
+.section-label-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.ver-todos-link {
+    flex-shrink: 0;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 650;
+    white-space: nowrap;
 }
 
 .section-number {
@@ -406,7 +423,73 @@ section {
     font-size: 10px;
 }
 
+/* ==============================
+   VER TODAS LAS PLANTILLAS (home)
+============================== */
+.templates-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 13px;
+}
 
+.templates-footer .template-note {
+    margin-top: 0;
+}
+
+
+
+.ver-todos-link:hover {
+    text-decoration: underline;
+}
+
+/* ==============================
+   PÁGINA /plantillas
+============================== */
+.templates-page-header {
+    padding: 72px 0 0;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    transition: color .15s ease;
+}
+
+.back-link:hover {
+    color: var(--accent);
+}
+
+.templates-page-title {
+    margin-top: 17px;
+    font-size: 25px;
+    letter-spacing: -.7px;
+    font-weight: 500;
+}
+
+.templates-page-description {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.templates-page-header .header-line {
+    margin-top: 29px;
+}
+
+.templates-page-header+.templates {
+    margin-top: 40px;
+}
+
+.templates-page-note {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
 
 .capabilities {
     display: grid;
@@ -621,6 +704,20 @@ footer {
 
     .container {
         width: min(100% - 30px, 820px);
+    }
+
+    .templates-page-header {
+        padding-top: 48px;
+    }
+
+    .templates-page-title {
+        font-size: 22px;
+    }
+
+    .templates-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 
     header {
