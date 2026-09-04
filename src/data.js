@@ -67,7 +67,7 @@ export const templates = [
     {
         index: "02",
         name: "Odontología",
-        category: "Salud  · Landing page",
+        category: "Salud · Landing page",
         image: "/templates/odontologia/odontologia.png",
         link: "/templates/odontologia/odontologia.html"
     },
@@ -81,14 +81,14 @@ export const templates = [
     {
         index: "04",
         name: "Gimnasio",
-        category: "Fitness  · Landing page",
+        category: "Fitness · Landing page",
         image: "/templates/gym/gym.png",
         link: "/templates/gym/gym.html"
     },
     {
         index: "05",
         name: "Cafetería",
-        category: "Gastronomía  · Landing page",
+        category: "Gastronomía · Landing page",
         image: "/templates/cafeteria/cafeteria.png",
         link: "/templates/cafeteria/cafeteria.html"
     },
@@ -98,6 +98,13 @@ export const templates = [
         category: "Gastronomía · Landing page",
         image: "/templates/parrilla/parrilla.png",
         link: "https://demo-parrilla.vercel.app/"
+    },
+    {
+        index: "07",
+        name: "Gimnasio",
+        category: "Fitness · Landing page",
+        image: "/templates/gym/gym2.png",
+        link: "/templates/gym/gym2.html"
     },
 
 ];
