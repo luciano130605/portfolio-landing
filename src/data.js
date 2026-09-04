@@ -61,29 +61,29 @@ export const templates = [
         index: "01",
         name: "Heladería",
         category: "Gastronomía · Landing page",
-        image: "/src/templates/heladeria/heladeria.png",
-        link: "/src/templates/heladeria/heladeria.html"
+        image: "/templates/heladeria/heladeria.png",
+        link: "/templates/heladeria/heladeria.html"
     },
     {
         index: "02",
         name: "Odontología",
         category: "Salud  · Landing page",
-        image: "/src/templates/odontologia/odontologia.png",
-        link: "/src/templates/odontologia/odontologia.html"
+        image: "/templates/odontologia/odontologia.png",
+        link: "/templates/odontologia/odontologia.html"
     },
     {
         index: "03",
         name: "Parrilla",
         category: "Gastronomía · Landing page",
-        image: "/src/templates/parrilla/parrilla.png",
-        link: "/src/templates/parrilla/parrilla.html"
+        image: "/templates/parrilla/parrilla.png",
+        link: "/templates/parrilla/parrilla.html"
     },
     {
         index: "04",
         name: "Gimnasio",
         category: "Fitness  · Landing page",
-        image: "/src/templates/gym/gym.png",
-        link: "/src/templates/gym/gym.html"
+        image: "/templates/gym/gym.png",
+        link: "/templates/gym/gym.html"
     }
 ];
 
