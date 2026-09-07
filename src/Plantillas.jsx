@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { templates } from "./data";
+import { useLanguage } from "./LanguageContext";
+import { tr, ui } from "./translations";
+import LanguageToggle from "./LanguageToggle";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 18 },
@@ -19,6 +22,9 @@ const stagger = {
 };
 
 export default function Plantillas() {
+    const { language } = useLanguage();
+    const t = (value) => tr(value, language);
+
     return (
         <main className="container">
             <motion.header
@@ -27,14 +33,18 @@ export default function Plantillas() {
                 animate="visible"
                 variants={fadeUp}
             >
-                <Link to="/" className="back-link">
-                    Volver
-                </Link>
+                <div className="templates-page-top">
+                    <Link to="/" className="back-link">
+                        {t(ui.templatesPage.back)}
+                    </Link>
 
-                <h1 className="templates-page-title">Todas las plantillas</h1>
+                    <LanguageToggle />
+                </div>
+
+                <h1 className="templates-page-title">{t(ui.templatesPage.title)}</h1>
 
                 <p className="templates-page-description">
-                    Demos conceptuales creadas para distintos rubros y necesidades.
+                    {t(ui.templatesPage.description)}
                 </p>
 
                 <div className="header-line" />
@@ -55,7 +65,7 @@ export default function Plantillas() {
                         <div className="template-preview">
                             <img
                                 src={template.image}
-                                alt={`Preview de ${template.name}`}
+                                alt={`Preview de ${t(template.name)}`}
                                 loading="lazy"
                             />
                         </div>
@@ -68,11 +78,11 @@ export default function Plantillas() {
 
                                 <div>
                                     <h3 className="template-name">
-                                        {template.name}
+                                        {t(template.name)}
                                     </h3>
 
                                     <p className="template-category">
-                                        {template.category}
+                                        {t(template.category)}
                                     </p>
                                 </div>
                             </div>
@@ -83,7 +93,7 @@ export default function Plantillas() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Ver demo
+                                {t(ui.sections.plantillas.verDemo)}
                             </a>
                         </div>
                     </motion.article>
@@ -91,8 +101,7 @@ export default function Plantillas() {
             </motion.div>
 
             <p className="template-note templates-page-note">
-                * Las plantillas son conceptos desarrollados para portfolio y demostración.
-                No corresponden a negocios reales.
+                {t(ui.sections.plantillas.note)}
             </p>
         </main>
     );

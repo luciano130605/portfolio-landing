@@ -1,12 +1,29 @@
 export const header = {
     name: "Luciano de la Peña",
-    availability: "Disponible para proyectos",
-    headline: "Diseño y desarrollo",
-    headlineAccent: "páginas web.",
-    intro:
-        "Creo landing pages, sitios para negocios y aplicaciones web con diseños claros, responsive y adaptados a cada proyecto.",
-    location: "Buenos Aires",
-    area: "Desarrollo Web",
+    availability: {
+        es: "Disponible para proyectos",
+        en: "Available for projects",
+    },
+    headline: {
+        es: "Diseño y desarrollo",
+        en: "Design and development",
+    },
+    headlineAccent: {
+        es: "páginas web.",
+        en: "of web pages.",
+    },
+    intro: {
+        es: "Creo landing pages, sitios para negocios y aplicaciones web con diseños claros, responsive y adaptados a cada proyecto.",
+        en: "I build landing pages, business websites and web apps with clean, responsive designs tailored to each project.",
+    },
+    location: {
+        es: "Buenos Aires",
+        en: "Buenos Aires",
+    },
+    area: {
+        es: "Desarrollo Web",
+        en: "Web Development",
+    },
     email: "luciano.delapena@gmail.com",
     whatsapp: "5491158161755",
     github: "https://github.com/luciano130605",
@@ -14,205 +31,265 @@ export const header = {
 
 export const services = [
     {
-        "number": "01",
-        "title": "Landing pages",
-        "description": "Páginas enfocadas en presentar un negocio, servicio, producto o campaña."
+        number: "01",
+        title: { es: "Landing pages", en: "Landing pages" },
+        description: {
+            es: "Páginas enfocadas en presentar un negocio, servicio, producto o campaña.",
+            en: "Pages focused on presenting a business, service, product or campaign.",
+        },
     },
     {
-        "number": "02",
-        "title": "Webs para negocios",
-        "description": "Sitios para mostrar servicios, horarios, ubicación, información y formas de contacto."
+        number: "02",
+        title: { es: "Webs para negocios", en: "Business websites" },
+        description: {
+            es: "Sitios para mostrar servicios, horarios, ubicación, información y formas de contacto.",
+            en: "Sites to showcase services, hours, location, information and contact options.",
+        },
     },
     {
-        "number": "03",
-        "title": "Catálogos",
-        "description": "Productos organizados de forma clara para facilitar consultas y ventas."
+        number: "03",
+        title: { es: "Catálogos", en: "Catalogs" },
+        description: {
+            es: "Productos organizados de forma clara para facilitar consultas y ventas.",
+            en: "Products organized clearly to make browsing and selling easier.",
+        },
     },
     {
-        "number": "04",
-        "title": "Aplicaciones web",
-        "description": "Herramientas y plataformas desarrolladas para resolver necesidades específicas."
+        number: "04",
+        title: { es: "Aplicaciones web", en: "Web applications" },
+        description: {
+            es: "Herramientas y plataformas desarrolladas para resolver necesidades específicas.",
+            en: "Tools and platforms built to solve specific needs.",
+        },
     },
     {
-        "number": "05",
-        "title": "Rediseños",
-        "description": "Mejoras visuales, responsive y de experiencia para sitios existentes."
-    }
+        number: "05",
+        title: { es: "Rediseños", en: "Redesigns" },
+        description: {
+            es: "Mejoras visuales, responsive y de experiencia para sitios existentes.",
+            en: "Visual, responsive and UX improvements for existing sites.",
+        },
+    },
 ];
 
 export const projects = [
-
     {
-        "title": "Evently",
-        "status": "Aplicación web",
-        "description": "Plataforma para gestionar eventos, invitados, confirmaciones y asistencia.",
-        "tech": [
-            "React",
-            "Supabase",
-            "UI"
-        ],
-        "link": "https://evently-azure-six.vercel.app"
+        title: "Evently",
+        status: {
+            es: "Aplicación web",
+            en: "Web application",
+        },
+        description: {
+            es: "Plataforma para gestionar eventos, invitados, confirmaciones y asistencia.",
+            en: "Platform to manage events, guests, RSVPs and attendance.",
+        },
+        tech: ["React", "Supabase", "UI"],
+        link: "https://evently-azure-six.vercel.app",
     },
-
 ];
 
 export const templates = [
     {
         index: "01",
-        name: "Heladería",
-        category: "Gastronomía · Landing page",
+        name: { es: "Heladería", en: "Ice cream shop" },
+        category: { es: "Gastronomía · Landing page", en: "Food & drink · Landing page" },
         image: "/templates/heladeria/heladeria.png",
-        link: "/templates/heladeria/heladeria.html"
+        link: "/templates/heladeria/heladeria.html",
     },
     {
         index: "02",
-        name: "Odontología",
-        category: "Salud · Landing page",
+        name: { es: "Odontología", en: "Dental clinic" },
+        category: { es: "Salud · Landing page", en: "Health · Landing page" },
         image: "/templates/odontologia/odontologia.png",
-        link: "/templates/odontologia/odontologia.html"
+        link: "/templates/odontologia/odontologia.html",
     },
     {
         index: "03",
-        name: "hamburguesería",
-        category: "Gastronomía · Landing page",
+        name: { es: "Hamburguesería", en: "Burger joint" },
+        category: { es: "Gastronomía · Landing page", en: "Food & drink · Landing page" },
         image: "/templates/burger/burger.png",
-        link: "https://demo-burger-nine.vercel.app/"
+        link: "https://demo-burger-nine.vercel.app/",
     },
     {
         index: "04",
-        name: "Gimnasio",
-        category: "Fitness · Landing page",
+        name: { es: "Gimnasio", en: "Gym" },
+        category: { es: "Fitness · Landing page", en: "Fitness · Landing page" },
         image: "/templates/gym/gym.png",
-        link: "/templates/gym/gym.html"
+        link: "/templates/gym/gym.html",
     },
     {
         index: "05",
-        name: "Cafetería",
-        category: "Gastronomía · Landing page",
+        name: { es: "Cafetería", en: "Coffee shop" },
+        category: { es: "Gastronomía · Landing page", en: "Food & drink · Landing page" },
         image: "/templates/cafeteria/cafeteria.png",
-        link: "/templates/cafeteria/cafeteria.html"
+        link: "/templates/cafeteria/cafeteria.html",
     },
     {
         index: "06",
-        name: "Parrilla",
-        category: "Gastronomía · Landing page",
+        name: { es: "Parrilla", en: "Steakhouse" },
+        category: { es: "Gastronomía · Landing page", en: "Food & drink · Landing page" },
         image: "/templates/parrilla/parrilla.png",
-        link: "https://demo-parrilla.vercel.app/"
+        link: "https://demo-parrilla.vercel.app/",
     },
     {
         index: "07",
-        name: "Gimnasio",
-        category: "Fitness · Landing page",
+        name: { es: "Gimnasio", en: "Gym" },
+        category: { es: "Fitness · Landing page", en: "Fitness · Landing page" },
         image: "/templates/gym/gym2.png",
-        link: "/templates/gym/gym2.html"
+        link: "/templates/gym/gym2.html",
     },
-
 ];
-
 
 export const capabilities = [
     {
-        "title": "Vender",
-        "description": "Productos, servicios, catálogos y llamados a la acción pensados para generar ventas."
+        title: { es: "Vender", en: "Sell" },
+        description: {
+            es: "Productos, servicios, catálogos y llamados a la acción pensados para generar ventas.",
+            en: "Products, services, catalogs and calls to action designed to generate sales.",
+        },
     },
     {
-        "title": "Recibir consultas",
-        "description": "WhatsApp, formularios, llamadas y otros canales de contacto."
+        title: { es: "Recibir consultas", en: "Receive inquiries" },
+        description: {
+            es: "WhatsApp, formularios, llamadas y otros canales de contacto.",
+            en: "WhatsApp, forms, calls and other contact channels.",
+        },
     },
     {
-        "title": "Reservar",
-        "description": "Turnos, reservas y solicitudes adaptadas a cada negocio."
+        title: { es: "Reservar", en: "Book" },
+        description: {
+            es: "Turnos, reservas y solicitudes adaptadas a cada negocio.",
+            en: "Appointments, bookings and requests tailored to each business.",
+        },
     },
     {
-        "title": "Mostrar información",
-        "description": "Servicios, horarios, ubicación, precios, productos y todo lo que el cliente necesite saber."
+        title: { es: "Mostrar información", en: "Show information" },
+        description: {
+            es: "Servicios, horarios, ubicación, precios, productos y todo lo que el cliente necesite saber.",
+            en: "Services, hours, location, prices, products and everything a customer needs to know.",
+        },
     },
     {
-        "title": "Conectar canales",
-        "description": "Redes sociales, WhatsApp, mapas y otras herramientas que ya usa tu negocio."
+        title: { es: "Conectar canales", en: "Connect channels" },
+        description: {
+            es: "Redes sociales, WhatsApp, mapas y otras herramientas que ya usa tu negocio.",
+            en: "Social media, WhatsApp, maps and other tools your business already uses.",
+        },
     },
     {
-        "title": "Lo que necesites",
-        "description": "Si se puede hacer en una web, se puede evaluar e integrar al proyecto."
-    }
+        title: { es: "Lo que necesites", en: "Whatever you need" },
+        description: {
+            es: "Si se puede hacer en una web, se puede evaluar e integrar al proyecto.",
+            en: "If it can be done on a website, it can be evaluated and integrated into the project.",
+        },
+    },
 ];
 
 export const features = [
-    "Responsive",
-    "WhatsApp",
-    "Formularios",
-    "Google Maps",
-    "Galerías",
-    "Catálogos",
-    "Turnos",
-    "Reservas",
-    "Redes sociales",
-    "SEO básico",
-    "Animaciones",
-    "Integraciones",
-    "Pagos",
-    "Publicación"
+    { es: "Responsive", en: "Responsive" },
+    { es: "WhatsApp", en: "WhatsApp" },
+    { es: "Formularios", en: "Forms" },
+    { es: "Google Maps", en: "Google Maps" },
+    { es: "Galerías", en: "Galleries" },
+    { es: "Catálogos", en: "Catalogs" },
+    { es: "Turnos", en: "Appointments" },
+    { es: "Reservas", en: "Bookings" },
+    { es: "Redes sociales", en: "Social media" },
+    { es: "SEO básico", en: "Basic SEO" },
+    { es: "Animaciones", en: "Animations" },
+    { es: "Integraciones", en: "Integrations" },
+    { es: "Pagos", en: "Payments" },
+    { es: "Publicación", en: "Deployment" },
 ];
 
 export const industries = [
-    "Comercios",
-    "Servicios",
-    "Profesionales",
-    "Gastronomía",
-    "Belleza",
-    "Fitness",
-    "Inmobiliarias",
-    "Automotor",
-    "Eventos",
-    "Startups",
-    "Proyectos personales",
-    "Y más"
+    { es: "Comercios", en: "Shops" },
+    { es: "Servicios", en: "Services" },
+    { es: "Profesionales", en: "Professionals" },
+    { es: "Gastronomía", en: "Food & drink" },
+    { es: "Belleza", en: "Beauty" },
+    { es: "Fitness", en: "Fitness" },
+    { es: "Inmobiliarias", en: "Real estate" },
+    { es: "Automotor", en: "Automotive" },
+    { es: "Eventos", en: "Events" },
+    { es: "Startups", en: "Startups" },
+    { es: "Proyectos personales", en: "Personal projects" },
+    { es: "Y más", en: "And more" },
 ];
 
 export const process = [
     {
-        "number": "01",
-        "title": "Idea",
-        "description": "Hablamos sobre el negocio, proyecto o necesidad."
+        number: "01",
+        title: { es: "Idea", en: "Idea" },
+        description: {
+            es: "Hablamos sobre el negocio, proyecto o necesidad.",
+            en: "We talk about the business, project or need.",
+        },
     },
     {
-        "number": "02",
-        "title": "Estructura",
-        "description": "Definimos qué información necesita la página y cómo organizarla."
+        number: "02",
+        title: { es: "Estructura", en: "Structure" },
+        description: {
+            es: "Definimos qué información necesita la página y cómo organizarla.",
+            en: "We define what information the site needs and how to organize it.",
+        },
     },
     {
-        "number": "03",
-        "title": "Desarrollo",
-        "description": "Construyo el sitio y adapto la experiencia a celular y PC."
+        number: "03",
+        title: { es: "Desarrollo", en: "Development" },
+        description: {
+            es: "Construyo el sitio y adapto la experiencia a celular y PC.",
+            en: "I build the site and adapt the experience for mobile and desktop.",
+        },
     },
     {
-        "number": "04",
-        "title": "Lanzamiento",
-        "description": "Publicamos el sitio y lo dejamos listo para compartir."
-    }
+        number: "04",
+        title: { es: "Lanzamiento", en: "Launch" },
+        description: {
+            es: "Publicamos el sitio y lo dejamos listo para compartir.",
+            en: "We publish the site and get it ready to share.",
+        },
+    },
 ];
 
 export const about = {
-    text:
-        "Soy desarrollador web y estudiante de Desarrollo de Software. Creo sitios pensados para cada negocio, buscando que se vean bien, funcionen rápido y tengan sentido para lo que necesita cada proyecto.",
-    meta: ["Desarrollo de Software", "IFTS N°11", "Buenos Aires"],
+    text: {
+        es: "Soy desarrollador web y estudiante de Desarrollo de Software. Creo sitios pensados para cada negocio, buscando que se vean bien, funcionen rápido y tengan sentido para lo que necesita cada proyecto.",
+        en: "I'm a web developer and Software Development student. I build sites designed for each business, aiming for them to look good, run fast, and make sense for what each project needs.",
+    },
+    meta: [
+        { es: "Desarrollo de Software", en: "Software Development" },
+        { es: "IFTS N°11", en: "IFTS No. 11" },
+        { es: "Buenos Aires", en: "Buenos Aires" },
+    ],
 };
 
 export const howIWork = {
-    description:
-        "La tecnología queda detrás. Lo importante es que la web funcione y cumpla su objetivo.",
+    description: {
+        es: "La tecnología queda detrás. Lo importante es que la web funcione y cumpla su objetivo.",
+        en: "The technology stays in the background. What matters is that the site works and does its job.",
+    },
     items: [
-        "Diseño a medida",
-        "Responsive",
-        "Rápida",
-        "Adaptada al negocio",
-        "Fácil de usar",
-        "Lista para publicar",
+        { es: "Diseño a medida", en: "Custom design" },
+        { es: "Responsive", en: "Responsive" },
+        { es: "Rápida", en: "Fast" },
+        { es: "Adaptada al negocio", en: "Tailored to the business" },
+        { es: "Fácil de usar", en: "Easy to use" },
+        { es: "Lista para publicar", en: "Ready to launch" },
     ],
 };
 
 export const education = {
-    title: "Tecnicatura en Desarrollo de Software",
-    place: "IFTS N°11",
-    date: "2024 — Actualidad",
+    title: {
+        es: "Tecnicatura en Desarrollo de Software",
+        en: "Associate's Degree in Software Development",
+    },
+    place: {
+        es: "IFTS N°11",
+        en: "IFTS No. 11",
+    },
+    date: {
+        es: "2024 — Actualidad",
+        en: "2024 — Present",
+    },
 };

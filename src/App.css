@@ -19,6 +19,20 @@ html {
     scroll-behavior: smooth;
 }
 
+
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.templates-page-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 body {
     background: var(--bg);
     color: var(--text);

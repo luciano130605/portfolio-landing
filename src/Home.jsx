@@ -13,6 +13,9 @@ import {
     howIWork,
     education,
 } from "./data";
+import { useLanguage } from "./LanguageContext";
+import { tr, ui } from "./translations";
+import LanguageToggle from "./LanguageToggle";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 18 },
@@ -58,6 +61,9 @@ function Section({ number, title, description, id, action, children }) {
 const TEMPLATES_PREVIEW_COUNT = 4;
 
 export default function Home() {
+    const { language } = useLanguage();
+    const t = (value) => tr(value, language);
+
     const previewTemplates = templates.slice(0, TEMPLATES_PREVIEW_COUNT);
     const hasMoreTemplates = templates.length > TEMPLATES_PREVIEW_COUNT;
 
@@ -68,28 +74,30 @@ export default function Home() {
                     <div>
                         <h1 className="name">{header.name}</h1>
                     </div>
+
+                    <LanguageToggle />
                 </motion.div>
 
                 <motion.h2 className="headline" variants={fadeUp}>
-                    {header.headline} <span>{header.headlineAccent}</span>
+                    {t(header.headline)} <span>{t(header.headlineAccent)}</span>
                 </motion.h2>
 
                 <motion.p className="intro" variants={fadeUp}>
-                    {header.intro}
+                    {t(header.intro)}
                 </motion.p>
 
                 <motion.div className="header-actions" variants={fadeUp}>
                     <a href="#proyectos" className="btn btn-primary">
-                        Ver trabajos
+                        {t(ui.header.verTrabajos)}
                     </a>
                     <a href="#contacto" className="btn">
-                        Contactarme
+                        {t(ui.header.contactarme)}
                     </a>
                 </motion.div>
 
                 <motion.div className="header-meta" variants={fadeUp}>
-                    <span>{header.location}</span>
-                    <span>{header.area}</span>
+                    <span>{t(header.location)}</span>
+                    <span>{t(header.area)}</span>
                 </motion.div>
 
                 <div className="header-line" />
@@ -97,8 +105,8 @@ export default function Home() {
 
             <Section
                 number="01"
-                title="Qué hago"
-                description="Desarrollo distintos tipos de soluciones según lo que necesite cada proyecto."
+                title={t(ui.sections.queHago.title)}
+                description={t(ui.sections.queHago.description)}
             >
                 <motion.div
                     className="services"
@@ -110,8 +118,8 @@ export default function Home() {
                     {services.map((service) => (
                         <motion.div className="service" variants={fadeUp} key={service.number}>
                             <span className="service-number">{service.number}</span>
-                            <h3 className="service-title">{service.title}</h3>
-                            <p className="service-description">{service.description}</p>
+                            <h3 className="service-title">{t(service.title)}</h3>
+                            <p className="service-description">{t(service.description)}</p>
                         </motion.div>
                     ))}
                 </motion.div>
@@ -119,9 +127,9 @@ export default function Home() {
 
             <Section
                 number="02"
-                title="Proyectos"
+                title={t(ui.sections.proyectos.title)}
                 id="proyectos"
-                description="Aplicaciones y productos que desarrollé como parte de mi trabajo y aprendizaje."
+                description={t(ui.sections.proyectos.description)}
             >
                 <motion.div
                     className="project-list"
@@ -140,14 +148,14 @@ export default function Home() {
                             <div className="project-main">
                                 <div className="project-title-row">
                                     <h3 className="project-title">{project.title}</h3>
-                                    <span className="project-status">{project.status}</span>
+                                    <span className="project-status">{t(project.status)}</span>
                                 </div>
 
-                                <p className="project-description">{project.description}</p>
+                                <p className="project-description">{t(project.description)}</p>
                             </div>
 
                             <a href={project.link} className="project-link">
-                                Ver proyecto
+                                {t(ui.sections.proyectos.verProyecto)}
                             </a>
                         </motion.article>
                     ))}
@@ -156,12 +164,12 @@ export default function Home() {
 
             <Section
                 number="03"
-                title="Plantillas"
-                description="Demos conceptuales creadas para distintos rubros y necesidades."
+                title={t(ui.sections.plantillas.title)}
+                description={t(ui.sections.plantillas.description)}
                 action={
                     hasMoreTemplates && (
                         <Link to="/plantillas" className="ver-todos-link">
-                            Ver todas
+                            {t(ui.sections.plantillas.verTodas)}
                         </Link>
                     )
                 }
@@ -182,7 +190,7 @@ export default function Home() {
                             <div className="template-preview">
                                 <img
                                     src={template.image}
-                                    alt={`Preview de ${template.name}`}
+                                    alt={`Preview de ${t(template.name)}`}
                                     loading="lazy"
                                 />
                             </div>
@@ -195,11 +203,11 @@ export default function Home() {
 
                                     <div>
                                         <h3 className="template-name">
-                                            {template.name}
+                                            {t(template.name)}
                                         </h3>
 
                                         <p className="template-category">
-                                            {template.category}
+                                            {t(template.category)}
                                         </p>
                                     </div>
                                 </div>
@@ -210,23 +218,20 @@ export default function Home() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    Ver demo
+                                    {t(ui.sections.plantillas.verDemo)}
                                 </a>
                             </div>
                         </motion.article>
                     ))}
                 </motion.div>
 
-                <p className="template-note">
-                    * Las plantillas son conceptos desarrollados para portfolio y demostración.
-                    No corresponden a negocios reales.
-                </p>
+                <p className="template-note">{t(ui.sections.plantillas.note)}</p>
             </Section>
 
             <Section
                 number="04"
-                title="Soluciones"
-                description="La web se adapta a lo que necesitás para mostrar, vender o hacer crecer tu negocio."
+                title={t(ui.sections.soluciones.title)}
+                description={t(ui.sections.soluciones.description)}
             >
                 <motion.div
                     className="capabilities"
@@ -236,15 +241,15 @@ export default function Home() {
                     viewport={{ once: true, amount: 0.15 }}
                 >
                     {capabilities.map((item) => (
-                        <motion.div className="capability" variants={fadeUp} key={item.title}>
-                            <h3 className="capability-title">{item.title}</h3>
-                            <p className="capability-description">{item.description}</p>
+                        <motion.div className="capability" variants={fadeUp} key={t(item.title)}>
+                            <h3 className="capability-title">{t(item.title)}</h3>
+                            <p className="capability-description">{t(item.description)}</p>
                         </motion.div>
                     ))}
                 </motion.div>
             </Section>
 
-            <Section number="05" title="Funcionalidades">
+            <Section number="05" title={t(ui.sections.funcionalidades.title)}>
                 <motion.div
                     className="features"
                     variants={stagger}
@@ -253,8 +258,8 @@ export default function Home() {
                     viewport={{ once: true, amount: 0.15 }}
                 >
                     {features.map((feature) => (
-                        <motion.span className="feature" variants={fadeUp} key={feature}>
-                            {feature}
+                        <motion.span className="feature" variants={fadeUp} key={t(feature)}>
+                            {t(feature)}
                         </motion.span>
                     ))}
                 </motion.div>
@@ -262,8 +267,8 @@ export default function Home() {
 
             <Section
                 number="06"
-                title="Rubros"
-                description="Trabajo con distintos tipos de negocios y proyectos. La web se arma según lo que necesites."
+                title={t(ui.sections.rubros.title)}
+                description={t(ui.sections.rubros.description)}
             >
                 <motion.div
                     className="industries"
@@ -273,8 +278,8 @@ export default function Home() {
                     viewport={{ once: true, amount: 0.15 }}
                 >
                     {industries.map((industry) => (
-                        <motion.span className="industry" variants={fadeUp} key={industry}>
-                            {industry}
+                        <motion.span className="industry" variants={fadeUp} key={t(industry)}>
+                            {t(industry)}
                         </motion.span>
                     ))}
                 </motion.div>
@@ -282,8 +287,8 @@ export default function Home() {
 
             <Section
                 number="07"
-                title="Proceso"
-                description="Una forma simple de llevar una idea hasta una web publicada."
+                title={t(ui.sections.proceso.title)}
+                description={t(ui.sections.proceso.description)}
             >
                 <motion.div
                     className="process"
@@ -295,34 +300,34 @@ export default function Home() {
                     {process.map((item) => (
                         <motion.div className="process-item" variants={fadeUp} key={item.number}>
                             <span className="process-number">{item.number}</span>
-                            <h3 className="process-title">{item.title}</h3>
-                            <p className="process-description">{item.description}</p>
+                            <h3 className="process-title">{t(item.title)}</h3>
+                            <p className="process-description">{t(item.description)}</p>
                         </motion.div>
                     ))}
                 </motion.div>
             </Section>
 
-            <Section number="08" title="Sobre mí">
+            <Section number="08" title={t(ui.sections.sobreMi.title)}>
                 <div className="about">
-                    <p className="about-text">{about.text}</p>
+                    <p className="about-text">{t(about.text)}</p>
 
                     <div className="about-meta">
                         {about.meta.map((item) => (
-                            <span key={item}>{item}</span>
+                            <span key={t(item)}>{t(item)}</span>
                         ))}
                     </div>
                 </div>
             </Section>
 
-            <Section number="10" title="Formación">
+            <Section number="10" title={t(ui.sections.formacion.title)}>
                 <div className="education">
                     <div className="education-item">
                         <div>
-                            <h3 className="education-title">{education.title}</h3>
-                            <p className="education-place">{education.place}</p>
+                            <h3 className="education-title">{t(education.title)}</h3>
+                            <p className="education-place">{t(education.place)}</p>
                         </div>
 
-                        <span className="education-date">{education.date}</span>
+                        <span className="education-date">{t(education.date)}</span>
                     </div>
                 </div>
             </Section>
@@ -335,17 +340,15 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.25 }}
                 variants={fadeUp}
             >
-                <div className="contact-label">¿Tenés un proyecto?</div>
+                <div className="contact-label">{t(ui.contact.label)}</div>
 
-                <h2 className="contact-title">Hagamos algo para tu negocio.</h2>
+                <h2 className="contact-title">{t(ui.contact.title)}</h2>
 
-                <p className="contact-description">
-                    Contame qué necesitás y vemos cómo convertir la idea en una web.
-                </p>
+                <p className="contact-description">{t(ui.contact.description)}</p>
 
                 <div className="contact-actions">
                     <a href={`mailto:${header.email}`} className="btn btn-primary">
-                        Enviar email
+                        {t(ui.contact.sendEmail)}
                     </a>
 
                     <a
@@ -363,7 +366,7 @@ export default function Home() {
                 <span>© 2026 {header.name}</span>
 
                 <div className="footer-links">
-                    <a href={`mailto:${header.email}`}>Email</a>
+                    <a href={`mailto:${header.email}`}>{t(ui.footer.email)}</a>
                     <a href={header.github} target="_blank" rel="noreferrer">
                         GitHub
                     </a>
