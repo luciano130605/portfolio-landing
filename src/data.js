@@ -92,9 +92,9 @@ export const templates = [
     {
         index: "01",
         name: { es: "Heladería", en: "Ice cream shop" },
-        category: { es: "Gastronomía · Landing page", en: "Food & drink · Landing page" },
+        category: { es: "Gastronomía · Website", en: "Food & drink · Website" },
         image: "/templates/heladeria/heladeria.png",
-        link: "/templates/heladeria/heladeria.html",
+        link: "https://demo-heladeria.vercel.app/",
     },
     {
         index: "02",
