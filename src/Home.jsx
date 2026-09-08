@@ -359,6 +359,15 @@ export default function Home() {
                     >
                         WhatsApp
                     </a>
+
+                    <a
+                        href={`https://portfolio-gamma-puce-17.vercel.app/`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn"
+                    >
+                        Portfolio
+                    </a>
                 </div>
             </motion.section>
 
