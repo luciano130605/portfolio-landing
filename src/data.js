@@ -134,9 +134,9 @@ export const templates = [
     {
         index: "07",
         name: { es: "Gimnasio", en: "Gym" },
-        category: { es: "Fitness · Landing page", en: "Fitness · Landing page" },
+        category: { es: "Fitness · Website", en: "Fitness · Website" },
         image: "/templates/gym/gym2.png",
-        link: "/templates/gym/gym2.html",
+               link: "https://demo-gym-ruby.vercel.app/",
     },
 ];
 
