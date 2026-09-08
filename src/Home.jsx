@@ -359,15 +359,6 @@ export default function Home() {
                     >
                         WhatsApp
                     </a>
-
-                    <a
-                        href={`https://portfolio-gamma-puce-17.vercel.app/`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn"
-                    >
-                        Portfolio
-                    </a>
                 </div>
             </motion.section>
 
@@ -378,6 +369,9 @@ export default function Home() {
                     <a href={`mailto:${header.email}`}>{t(ui.footer.email)}</a>
                     <a href={header.github} target="_blank" rel="noreferrer">
                         GitHub
+                    </a>
+                    <a href={header.portfolio} target="_blank" rel="noreferrer">
+                        Portfolio
                     </a>
                 </div>
             </footer>
