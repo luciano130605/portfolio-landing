@@ -131,13 +131,13 @@ export const templates = [
         image: "/templates/parrilla/parrilla.png",
         link: "https://demo-parrilla.vercel.app/",
     },
-    {
-        index: "07",
-        name: { es: "Gimnasio", en: "Gym" },
-        category: { es: "Fitness · Landing page", en: "Fitness · Landing page" },
-        image: "/templates/gym/gym2.png",
-        link: "https://demo-gym-ruby.vercel.app/",
-    },
+    // {
+    //     index: "07",
+    //     name: { es: "Gimnasio", en: "Gym" },
+    //     category: { es: "Fitness · Landing page", en: "Fitness · Landing page" },
+    //     image: "/templates/gym/gym2.png",
+    //     link: "https://demo-gym-ruby.vercel.app/",
+    // },
 ];
 
 export const capabilities = [
