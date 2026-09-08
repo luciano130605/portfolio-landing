@@ -115,7 +115,7 @@ export const templates = [
         name: { es: "Gimnasio", en: "Gym" },
         category: { es: "Fitness · Landing page", en: "Fitness · Landing page" },
         image: "/templates/gym/gym.png",
-        link: "/templates/gym/gym.html",
+        link: "https://demo-gym2-psi.vercel.app/",
     },
     {
         index: "05",
@@ -134,9 +134,9 @@ export const templates = [
     {
         index: "07",
         name: { es: "Gimnasio", en: "Gym" },
-        category: { es: "Fitness · Website", en: "Fitness · Website" },
+        category: { es: "Fitness · Landing page", en: "Fitness · Landing page" },
         image: "/templates/gym/gym2.png",
-               link: "https://demo-gym-ruby.vercel.app/",
+        link: "https://demo-gym-ruby.vercel.app/",
     },
 ];
 
