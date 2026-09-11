@@ -27,7 +27,7 @@ export const header = {
     email: "luciano.delapena@gmail.com",
     whatsapp: "5491158161755",
     github: "https://github.com/luciano130605",
-    portfolio: "https://portfolio-gamma-puce-17.vercel.app/",
+    portfolio: "https://www.lucianodelapena.com/",
 };
 
 export const services = [
