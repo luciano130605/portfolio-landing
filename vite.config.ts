@@ -89,7 +89,7 @@ function authPopupPlugin(): Plugin {
           );
           const proto = String(
             req.headers["x-forwarded-proto"] ??
-            ((req.socket as { encrypted?: boolean } | undefined)?.encrypted ? "https" : "http"),
+              ((req.socket as { encrypted?: boolean } | undefined)?.encrypted ? "https" : "http"),
           );
           const requestHeaders = new Headers();
           for (const [key, value] of Object.entries(req.headers)) {
@@ -146,7 +146,7 @@ function authPopupPlugin(): Plugin {
 // The dev server starts once `src/router.tsx` and `src/routes/` exist — see
 // AGENTS.md § "First scaffold".
 export default defineConfig(({ command, isPreview }) => ({
-  base: "/landing/",
+  
   server: {
     host: "0.0.0.0",
     port: 8080,
@@ -170,14 +170,14 @@ export default defineConfig(({ command, isPreview }) => ({
     tanstackStart(),
     ...(command === "build" || isPreview
       ? [
-        nitro({
-          preset: "vercel",
-          // Auto-registers server/middleware/* (the PWA install page +
-          // manifest + head-tag middleware). Nitro v3 defaults serverDir to
-          // false, so removing this silently unwires /?install=1 on deploys.
-          serverDir: "./server",
-        }),
-      ]
+          nitro({
+            preset: "vercel",
+            // Auto-registers server/middleware/* (the PWA install page +
+            // manifest + head-tag middleware). Nitro v3 defaults serverDir to
+            // false, so removing this silently unwires /?install=1 on deploys.
+            serverDir: "./server",
+          }),
+        ]
       : []),
     viteReact(),
   ],
