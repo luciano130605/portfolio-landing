@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Fogón de Braza — Parrilla</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --coal: #181310;
+            --coal2: #221a15;
+            --ember: #e06b2c;
+            --ember2: #ff8a3d;
+            --cream: #f2e9dd;
+            --line: rgba(242, 233, 221, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--coal);
+            color: var(--cream);
+            font-family: 'Inter', sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .display {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(24, 19, 16, 0.92);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 32px;
+            max-width: 1180px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-left: auto;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.35rem, 4.5vw, 1.7rem);
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--ember2);
+        }
+
+        .navlinks {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 0.92rem;
+        }
+
+        .navlinks a:hover {
+            color: var(--ember2);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.82rem;
+            padding: 6px 12px;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            color: #a89882;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #6b6058;
+        }
+
+        .status-pill.open .status-dot {
+            background: #6fbf73;
+            box-shadow: 0 0 0 0 rgba(111, 191, 115, 0.6);
+            animation: pulseDot 2s ease-out infinite;
+        }
+
+        .status-pill.open {
+            color: #cfe8d0;
+            border-color: rgba(111, 191, 115, 0.35);
+        }
+
+        @keyframes pulseDot {
+            0% {
+                box-shadow: 0 0 0 0 rgba(111, 191, 115, 0.55);
+            }
+
+            70% {
+                box-shadow: 0 0 0 7px rgba(111, 191, 115, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(111, 191, 115, 0);
+            }
+        }
+
+        .nav-cta {
+            background: var(--ember);
+            padding: 11px 22px;
+            font-size: 0.9rem;
+            border-radius: 1px;
+            font-weight: 600;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--ember2);
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            position: relative;
+            padding: 120px 32px 100px;
+            text-align: left;
+            background:
+                radial-gradient(ellipse at 75% 30%, rgba(224, 107, 44, 0.18), transparent 55%),
+                var(--coal);
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
+        }
+
+        .embers {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ember-particle {
+            position: absolute;
+            bottom: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--ember2), var(--ember) 70%, transparent);
+            animation: rise 6s ease-in infinite;
+        }
+
+        .ember-particle:nth-child(1) {
+            left: 62%;
+            width: 5px;
+            height: 5px;
+            animation-delay: 0s;
+        }
+
+        .ember-particle:nth-child(2) {
+            left: 71%;
+            width: 3px;
+            height: 3px;
+            animation-delay: 1.4s;
+        }
+
+        .ember-particle:nth-child(3) {
+            left: 80%;
+            width: 6px;
+            height: 6px;
+            animation-delay: 2.8s;
+        }
+
+        .ember-particle:nth-child(4) {
+            left: 88%;
+            width: 4px;
+            height: 4px;
+            animation-delay: 0.7s;
+        }
+
+        .ember-particle:nth-child(5) {
+            left: 68%;
+            width: 4px;
+            height: 4px;
+            animation-delay: 4s;
+        }
+
+        .ember-particle:nth-child(6) {
+            left: 92%;
+            width: 3px;
+            height: 3px;
+            animation-delay: 2.1s;
+        }
+
+        @keyframes rise {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+
+            10% {
+                opacity: 0.9;
+            }
+
+            80% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-320px) translateX(14px);
+            }
+        }
+
+        .hero-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: heroIn 0.7s ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        @keyframes heroIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero .eyebrow {
+            color: var(--ember2);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.2rem, 8vw, 6.4rem);
+            line-height: 0.92;
+            margin-bottom: 26px;
+            max-width: 14ch;
+        }
+
+        .hero p {
+            max-width: 44ch;
+            font-size: 1.1rem;
+            color: #cbbfae;
+            margin-bottom: 34px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn-primary {
+            background: var(--ember);
+            color: #181310;
+            padding: 15px 28px;
+            font-weight: 600;
+            border-radius: 1px;
+            border: none;
+            font-size: 0.95rem;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--ember2);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            padding: 15px 24px;
+            border: 1px solid var(--line);
+            border-radius: 1px;
+            transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--ember2);
+            color: var(--ember2);
+            transform: translateY(-2px);
+        }
+
+        .marquee {
+            border-bottom: 1px solid var(--line);
+            border-top: 1px solid var(--line);
+            padding: 16px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: inline-flex;
+            width: max-content;
+            animation: marqueeScroll 28s linear infinite;
+        }
+
+        @keyframes marqueeScroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.04em;
+            color: #443428;
+            padding: 0 24px;
+        }
+
+        .menu-section {
+            padding: 90px 32px;
+        }
+
+        .menu-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.6rem;
+            margin-bottom: 8px;
+        }
+
+        .menu-section>.wrap>p {
+            color: #a89882;
+            margin-bottom: 32px;
+            max-width: 50ch;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            background: transparent;
+            border: 1px solid var(--line);
+            color: #a89882;
+            padding: 10px 18px;
+            font-size: 0.86rem;
+            border-radius: 20px;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+
+        .tab:hover {
+            color: var(--cream);
+            border-color: rgba(242, 233, 221, 0.3);
+        }
+
+        .tab.active {
+            background: var(--ember);
+            border-color: var(--ember);
+            color: #181310;
+            font-weight: 600;
+        }
+
+        .cortes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+
+        .corte {
+            background: var(--coal);
+            padding: 30px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 20px;
+            transform: translateY(16px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .corte.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .corte.hidden {
+            display: none;
+        }
+
+        .corte h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .corte p {
+            color: #a89882;
+            font-size: 0.88rem;
+            margin-top: 6px;
+        }
+
+        .corte .price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            color: var(--ember2);
+            white-space: nowrap;
+        }
+
+        .foto-tira {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 0 32px 90px;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .foto {
+            aspect-ratio: 4/5;
+            border-radius: 2px;
+            border: none;
+            padding: 0;
+            transform: translateY(16px) scale(0.98);
+            transition: opacity 0.4s ease, transform 0.4s ease, filter 0.2s ease;
+        }
+
+        .foto.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .foto:hover {
+            filter: brightness(1.15);
+            transform: scale(1.02);
+        }
+
+        .f1 {
+            background: linear-gradient(160deg, #3a1f10, #7a3a17);
+        }
+
+        .f2 {
+            background: linear-gradient(160deg, #4a2213, #e06b2c);
+        }
+
+        .f3 {
+            background: linear-gradient(160deg, #2a1c12, #5a2e15);
+        }
+
+        .f4 {
+            background: linear-gradient(160deg, #6b2e12, #ff8a3d);
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(12, 9, 7, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .lightbox.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-img {
+            width: min(70vw, 480px);
+            aspect-ratio: 4/5;
+            border-radius: 3px;
+            transform: scale(0.95);
+            transition: transform 0.25s ease;
+        }
+
+        .lightbox.open .lightbox-img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 28px;
+            right: 32px;
+            color: var(--cream);
+            border: 1px solid var(--line);
+            background: transparent;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+        }
+
+        .lightbox-close:hover {
+            border-color: var(--ember2);
+            color: var(--ember2);
+        }
+
+        .info {
+            padding: 90px 32px;
+            border-top: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .info h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .info p {
+            color: #cbbfae;
+            margin-bottom: 14px;
+        }
+
+        .datos {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .dato {
+            border-left: 2px solid var(--ember);
+            padding-left: 18px;
+            transform: translateX(-10px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+
+        .dato.in-view {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .dato h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .dato p {
+            color: #a89882;
+            font-size: 0.9rem;
+        }
+
+        .cta {
+            padding: 90px 32px;
+            text-align: center;
+            background: var(--coal2);
+            border-top: 1px solid var(--line);
+        }
+
+        .cta h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.8rem;
+            max-width: 16ch;
+            margin: 0 auto 20px;
+        }
+
+        .cta>.wrap>p {
+            color: #a89882;
+            margin-bottom: 34px;
+        }
+
+        .reserva {
+            max-width: 620px;
+            margin: 0 auto;
+            background: var(--coal);
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            padding: 28px;
+            text-align: left;
+        }
+
+        .reserva-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .reserva-field label {
+            display: block;
+            font-size: 0.78rem;
+            color: #a89882;
+            margin-bottom: 7px;
+        }
+
+        .reserva-field select,
+        .reserva-field input {
+            width: 100%;
+            background: var(--coal2);
+            border: 1px solid var(--line);
+            color: var(--cream);
+            padding: 11px 12px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            border-radius: 1px;
+        }
+
+        .reserva-field select:focus,
+        .reserva-field input:focus {
+            outline: none;
+            border-color: var(--ember2);
+        }
+
+        .reserva-note {
+            font-size: 0.8rem;
+            color: #7a6c5a;
+            margin-top: 14px;
+            min-height: 1.2em;
+        }
+
+        .reserva-note.warn {
+            color: var(--ember2);
+        }
+
+        footer {
+            padding: 36px 32px;
+            border-top: 1px solid var(--line);
+            font-size: 0.88rem;
+            color: #7a6c5a;
+        }
+
+        .foot-row {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1180px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .hero-inner,
+            .corte,
+            .foto,
+            .dato {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .marquee-track,
+            .ember-particle,
+            .status-pill.open .status-dot {
+                animation: none !important;
+            }
+        }
+
+        @media(max-width:820px) {
+            .cortes {
+                grid-template-columns: 1fr;
+            }
+
+            .reserva-field input {
+                width: 90%;
+            }
+
+            .foto-tira {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .navlinks {
+                display: none;
+            }
+
+            .reserva-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 88px 24px 70px;
+            }
+
+            .menu-section,
+            .info,
+            .cta {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .wrap {
+                padding: 0 24px;
+            }
+
+            .foto-tira {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        @media(max-width:560px) {
+            .nav {
+                padding: 14px 20px;
+            }
+
+            .nav-right {
+                gap: 10px;
+                margin-left: 0;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .status-pill {
+                font-size: 0.72rem;
+                padding: 5px 10px;
+            }
+
+            .nav-cta {
+                padding: 10px 16px;
+                font-size: 0.84rem;
+            }
+
+            .hero {
+                padding: 76px 20px 56px;
+            }
+
+            .hero .eyebrow {
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                max-width: 100%;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-btns {
+                flex-wrap: wrap;
+                width: 100%;
+            }
+
+            .hero-btns a {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+
+            .wrap,
+            .menu-section,
+            .info,
+            .cta,
+            .foto-tira {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .menu-section h2,
+            .cta h2 {
+                font-size: 2.1rem;
+            }
+
+            .tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                margin-left: -20px;
+                margin-right: -20px;
+                padding-left: 20px;
+                padding-right: 20px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab {
+                white-space: nowrap;
+                flex: 0 0 auto;
+            }
+
+            .corte {
+                padding: 22px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .corte .price {
+                font-size: 1.25rem;
+            }
+
+            .foto-tira {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .info {
+                padding-top: 60px;
+                padding-bottom: 60px;
+            }
+
+            .reserva {
+                padding: 20px;
+            }
+
+            .foot-row {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .marquee span {
+                font-size: 1.05rem;
+                padding: 0 16px;
+            }
+
+            .lightbox-close {
+                top: 18px;
+                right: 18px;
+            }
+
+            .lightbox-img {
+                width: 86vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="nav">
+            <div class="logo">EL FOGÓN <span>DE BRAZA</span></div>
+            <nav class="navlinks">
+                <a href="#menu">Cortes</a>
+                <a href="#info">Salón</a>
+                <a href="#contacto">Reservas</a>
+            </nav>
+
+            <a href="#contacto" class="nav-cta">Reservar mesa</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="embers" aria-hidden="true">
+            <span class="ember-particle"></span>
+            <span class="ember-particle"></span>
+            <span class="ember-particle"></span>
+            <span class="ember-particle"></span>
+            <span class="ember-particle"></span>
+            <span class="ember-particle"></span>
+        </div>
+        <div class="hero-inner">
+            <p class="eyebrow">Parrilla a leña — desde 1998</p>
+            <h1 class="display">Carne de verdad, fuego de verdad</h1>
+            <p>Cortes seleccionados, cocción lenta sobre brasa de quebracho y la mesa siempre lista para compartir.
+                Abrimos todos los días al mediodía y a la noche.</p>
+            <div class="hero-btns">
+                <a href="#contacto" class="btn-primary">Reservar mesa</a>
+                <a href="#menu" class="btn-ghost">Ver la carta</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee">
+        <div class="marquee-track">
+            <span>ASADO DE TIRA · BIFE DE CHORIZO · ACHURAS · PROVOLETA · VACÍO · ENTRAÑA · CHORIZO CRIOLLO · MORCILLA
+                ·</span>
+            <span>ASADO DE TIRA · BIFE DE CHORIZO · ACHURAS · PROVOLETA · VACÍO · ENTRAÑA · CHORIZO CRIOLLO · MORCILLA
+                ·</span>
+        </div>
+    </div>
+
+    <section class="menu-section" id="menu">
+        <div class="wrap">
+            <h2>Los cortes de la casa</h2>
+            <p>Todo sale a la parrilla, al punto que pidas, con guarnición a elección.</p>
+            <div class="tabs" id="tabs">
+                <button class="tab active" data-cat="todos">Todos</button>
+                <button class="tab" data-cat="cortes">Cortes individuales</button>
+                <button class="tab" data-cat="compartir">Para compartir</button>
+            </div>
+            <div class="cortes" id="cortesGrid">
+                <div class="corte" data-cat="cortes">
+                    <div>
+                        <h3>Bife de chorizo</h3>
+                        <p>400g, con papas rústicas o ensalada</p>
+                    </div>
+                    <div class="price">$14.500</div>
+                </div>
+                <div class="corte" data-cat="cortes">
+                    <div>
+                        <h3>Asado de tira</h3>
+                        <p>3 costillas, cocción lenta a la brasa</p>
+                    </div>
+                    <div class="price">$13.200</div>
+                </div>
+                <div class="corte" data-cat="cortes">
+                    <div>
+                        <h3>Entraña</h3>
+                        <p>350g, punto jugoso recomendado</p>
+                    </div>
+                    <div class="price">$15.800</div>
+                </div>
+                <div class="corte" data-cat="compartir">
+                    <div>
+                        <h3>Parrillada para 2</h3>
+                        <p>Vacío, chorizo, morcilla y achuras</p>
+                    </div>
+                    <div class="price">$27.000</div>
+                </div>
+                <div class="corte" data-cat="compartir">
+                    <div>
+                        <h3>Provoleta</h3>
+                        <p>Con orégano y aceite de oliva, para empezar</p>
+                    </div>
+                    <div class="price">$6.400</div>
+                </div>
+                <div class="corte" data-cat="compartir">
+                    <div>
+                        <h3>Tabla de achuras</h3>
+                        <p>Chinchulín, mollejas y riñón a la parrilla</p>
+                    </div>
+                    <div class="price">$11.900</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="foto-tira">
+        <button class="foto f1" data-label="Brasas de quebracho"></button>
+        <button class="foto f2" data-label="Bife de chorizo al punto"></button>
+        <button class="foto f3" data-label="Salón con parrilla a la vista"></button>
+        <button class="foto f4" data-label="Parrillada para compartir"></button>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">✕</button>
+        <div class="lightbox-img" id="lightboxImg"></div>
+    </div>
+
+    <section class="info" id="info">
+        <div>
+            <h2 class="display">Un salón para compartir</h2>
+            <p>Mesas largas de madera, parrilla a la vista y un patio con parral para las noches de verano. Recibimos
+                grupos, cumpleaños y eventos de empresa.</p>
+            <p>Tenemos cava de vinos propia y una selección de tintos pensada para acompañar cada corte.</p>
+        </div>
+        <div class="datos">
+            <div class="dato">
+                <h4>Horarios</h4>
+                <p>Todos los días, 12 a 16 h y 20 a 00 h</p>
+            </div>
+            <div class="dato">
+                <h4>Ubicación</h4>
+                <p>Av. Rivadavia 4820, Caballito, CABA</p>
+            </div>
+            <div class="dato">
+                <h4>Reservas</h4>
+                <p>+54 9 11 5555-0192 — también por WhatsApp</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contacto">
+        <div class="wrap">
+            <h2 class="display">Reservá tu mesa para hoy</h2>
+            <p>Completá los datos y te llevamos directo a WhatsApp con todo listo para confirmar.</p>
+            <div class="reserva">
+                <div class="reserva-grid">
+                    <div class="reserva-field">
+                        <label for="resFecha">Fecha</label>
+                        <input type="date" id="resFecha">
+                    </div>
+                    <div class="reserva-field">
+                        <label for="resHora">Turno</label>
+                        <select id="resHora">
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="20:30" selected>20:30</option>
+                            <option value="21:00">21:00</option>
+                            <option value="21:30">21:30</option>
+                            <option value="22:00">22:00</option>
+                        </select>
+                    </div>
+                    <div class="reserva-field">
+                        <label for="resPersonas">Personas</label>
+                        <select id="resPersonas">
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7 o más</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-primary" id="resBtn" style="width:100%;">Reservar por WhatsApp</button>
+                <p class="reserva-note" id="resNote">Elegí fecha, turno y cantidad de personas.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="foot-row">
+            <span>El Fogón de Braza — Parrilla</span>
+            <span>Caballito, CABA — @elfogondebraza</span>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // --- Estado abierto / cerrado según horario (12-16 y 20-00 todos los días) ---
+            function updateStatus() {
+                var now = new Date();
+                var mins = now.getHours() * 60 + now.getMinutes();
+                var openLunch = mins >= 12 * 60 && mins < 16 * 60;
+                var openDinner = mins >= 20 * 60 || mins < 0 * 60 + 1; // 20:00 a 00:00
+                var pill = document.getElementById('statusPill');
+                var text = document.getElementById('statusText');
+                var isSmall = window.innerWidth <= 560;
+                if (openLunch || openDinner) {
+                    pill.classList.add('open');
+                    text.textContent = 'Abierto ahora';
+                } else {
+                    pill.classList.remove('open');
+                    var next;
+                    if (mins < 12 * 60) next = isSmall ? 'Abre a las 12 h' : 'Abrimos a las 12 h';
+                    else if (mins < 20 * 60) next = isSmall ? 'Abre a las 20 h' : 'Abrimos a las 20 h';
+                    else next = isSmall ? 'Abre mañana' : 'Abrimos mañana a las 12 h';
+                    text.textContent = next;
+                }
+            }
+            updateStatus();
+            setInterval(updateStatus, 60000);
+
+            // --- Filtro de carta por categoría ---
+            var tabs = document.querySelectorAll('.tab');
+            var cortes = document.querySelectorAll('.corte');
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    tabs.forEach(function (t) { t.classList.remove('active'); });
+                    tab.classList.add('active');
+                    var cat = tab.getAttribute('data-cat');
+                    cortes.forEach(function (c) {
+                        var match = cat === 'todos' || c.getAttribute('data-cat') === cat;
+                        c.classList.toggle('hidden', !match);
+                    });
+                });
+            });
+
+            // --- Lightbox de fotos ---
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = document.getElementById('lightboxImg');
+            var lightboxClose = document.getElementById('lightboxClose');
+            document.querySelectorAll('.foto').forEach(function (foto) {
+                foto.addEventListener('click', function () {
+                    lightboxImg.className = 'lightbox-img ' + Array.from(foto.classList).find(function (c) { return c.match(/^f\d$/); });
+                    lightbox.classList.add('open');
+                });
+            });
+            function closeLightbox() { lightbox.classList.remove('open'); }
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
+
+            // --- Reserva dinámica por WhatsApp ---
+            var resFecha = document.getElementById('resFecha');
+            var resHora = document.getElementById('resHora');
+            var resPersonas = document.getElementById('resPersonas');
+            var resBtn = document.getElementById('resBtn');
+            var resNote = document.getElementById('resNote');
+            var todayISO = new Date().toISOString().slice(0, 10);
+            resFecha.min = todayISO;
+            resFecha.value = todayISO;
+
+            resBtn.addEventListener('click', function () {
+                if (!resFecha.value) {
+                    resNote.textContent = 'Elegí una fecha para continuar.';
+                    resNote.classList.add('warn');
+                    return;
+                }
+                resNote.classList.remove('warn');
+                var fechaFmt = new Date(resFecha.value + 'T00:00:00').toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' });
+                var msg = 'Hola! Quiero reservar una mesa para ' + resPersonas.value + ' personas el ' + fechaFmt + ' a las ' + resHora.value + ' hs.';
+                var url = 'https://wa.me/5491155550192?text=' + encodeURIComponent(msg);
+                window.open(url, '_blank');
+                resNote.textContent = 'Te abrimos WhatsApp con el mensaje ya armado.';
+            });
+
+            // --- Scroll reveal ---
+            var revealTargets = document.querySelectorAll('.corte, .foto, .dato');
+            if (prefersReduced || !('IntersectionObserver' in window)) {
+                revealTargets.forEach(function (el) { el.classList.add('in-view'); });
+            } else {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry, i) {
+                        if (entry.isIntersecting) {
+                            var delay = (i % 4) * 70;
+                            setTimeout(function () { entry.target.classList.add('in-view'); }, delay);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+                revealTargets.forEach(function (el) { observer.observe(el); });
+            }
+        })();
+    </script>
+
+</body>
+
+</html>

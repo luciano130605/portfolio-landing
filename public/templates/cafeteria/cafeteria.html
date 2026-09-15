@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Hormiga — Tostado en Palermo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mandarina: #E8622C;
+            --menta: #2F6E62;
+            --crema: #FAF4E6;
+            --tinta: #1C1710;
+            --mostaza: #E3A72E;
+            --lila: #8E7BC7;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--crema);
+            color: var(--tinta);
+            font-family: 'Work Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .display {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            line-height: 1.15;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        :focus-visible {
+            outline: 2.5px solid var(--menta);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        header {
+            padding: 22px 6vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icono {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--mandarina);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--crema);
+            font-size: 0.9rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--tinta);
+            font-size: 0.86rem;
+            font-weight: 600;
+            padding: 9px 16px;
+            border-radius: 30px;
+            border: 1.5px solid var(--tinta);
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background: var(--tinta);
+            color: var(--crema);
+            transform: translateY(-2px);
+        }
+
+        @media(max-width:720px) {
+            nav {
+                display: none;
+            }
+        }
+
+        /* ===== hero ===== */
+        .hero {
+            max-width: 1180px;
+            margin: 20px auto 0;
+            padding: 40px 6vw 0;
+        }
+
+        .hero-top {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 24px;
+        }
+
+        .hero-headline {
+            background: var(--tinta);
+            color: var(--crema);
+            border-radius: 28px;
+            padding: 54px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-headline h1 {
+            font-size: clamp(2rem, 4.4vw, 3.1rem);
+            margin: 0 0 18px;
+            opacity: 0;
+            filter: blur(6px);
+            transform: scale(0.96);
+            animation: enfocar 0.9s cubic-bezier(.22, 1, .36, 1) 0.1s forwards;
+        }
+
+        .hero-headline h1 em {
+            font-style: normal;
+            color: var(--mostaza);
+        }
+
+        .hero-headline p {
+            color: #D8CFC0;
+            max-width: 42ch;
+            font-size: 1rem;
+            margin: 0 0 26px;
+            opacity: 0;
+            animation: aparecer 0.7s ease 0.55s forwards;
+        }
+
+        .hero-headline div:last-child {
+            opacity: 0;
+            animation: aparecer 0.7s ease 0.75s forwards;
+        }
+
+        @keyframes enfocar {
+            to {
+                opacity: 1;
+                filter: blur(0);
+                transform: scale(1);
+            }
+        }
+
+        @keyframes aparecer {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            font-family: 'Work Sans', sans-serif;
+            transition: transform 0.2s cubic-bezier(.22, 1, .36, 1), box-shadow 0.2s ease;
+        }
+
+        .btn.full {
+            background: var(--mostaza);
+            color: var(--tinta);
+        }
+
+        .btn.full:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(0, 0, 0, 0.12);
+        }
+
+        .btn.line {
+            border: 1.5px solid var(--crema);
+            color: var(--crema);
+            margin-left: 10px;
+        }
+
+        .btn.line:hover {
+            background: rgba(250, 244, 230, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .hero-side {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .card-color {
+            border-radius: 28px;
+            padding: 26px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            opacity: 0;
+            transform: translateX(26px) rotate(3deg);
+            transition: transform 0.35s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .card-color.entra {
+            animation: entrar-lateral 0.75s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+        .card-color.menta {
+            background: var(--menta);
+            color: var(--crema);
+        }
+
+        .card-color.menta.entra {
+            animation-delay: 0.35s;
+        }
+
+        .card-color.lila {
+            background: var(--lila);
+            color: var(--crema);
+        }
+
+        .card-color.lila.entra {
+            animation-delay: 0.55s;
+        }
+
+        .card-color:hover {
+            transform: translateY(-4px) rotate(0deg) !important;
+        }
+
+        @keyframes entrar-lateral {
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+
+        .card-color .num {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+        }
+
+        .card-color .label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+        }
+
+        @media(max-width:800px) {
+            .hero-top {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-side {
+                flex-direction: row;
+            }
+
+            .flex {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+
+            .flex .btn {
+                width: 100%;
+                margin-left: 0;
+                text-align: center;
+                box-sizing: border-box;
+            }
+        }
+
+        @media(max-width:520px) {
+            .hero-side {
+                flex-direction: column;
+            }
+
+            .hero-headline {
+                padding: 38px 26px;
+            }
+        }
+
+        /* ===== bento de producto ===== */
+        section.bento {
+            max-width: 1180px;
+            margin: 70px auto;
+            padding: 0 6vw;
+        }
+
+        section.bento>h2 {
+            font-size: 1.9rem;
+            margin-bottom: 8px;
+        }
+
+        section.bento>p.sub {
+            color: #5a4f3d;
+            max-width: 52ch;
+            margin-bottom: 36px;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: 130px;
+            gap: 18px;
+        }
+
+        .bento-item {
+            border-radius: 22px;
+            padding: 22px;
+            border: 2px solid var(--tinta);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: var(--crema);
+            opacity: 0;
+            transform: translateY(22px) scale(0.94);
+            transition: opacity 0.55s cubic-bezier(.22, 1, .36, 1), transform 0.55s cubic-bezier(.22, 1, .36, 1), border-color 0.2s ease;
+        }
+
+        .bento-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .bento-item:hover {
+            border-color: var(--mandarina);
+        }
+
+        .bento-item h3 {
+            font-size: 1.05rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .bento-item p {
+            font-size: 0.85rem;
+            margin: 0;
+            color: #5a4f3d;
+        }
+
+        .bento-item .precio {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.2rem;
+            color: var(--mandarina);
+        }
+
+        .b1 {
+            grid-column: span 3;
+            grid-row: span 2;
+            background: var(--mandarina);
+            color: var(--crema);
+            border-color: var(--mandarina);
+        }
+
+        .b1 p {
+            color: #FBE3D5;
+        }
+
+        .b1 .precio {
+            color: var(--crema);
+        }
+
+        .b1:hover {
+            border-color: var(--tinta);
+        }
+
+        .b2 {
+            grid-column: span 3;
+            grid-row: span 1;
+        }
+
+        .b3 {
+            grid-column: span 3;
+            grid-row: span 1;
+        }
+
+        .b4 {
+            grid-column: span 2;
+            grid-row: span 1;
+            background: var(--mostaza);
+            border-color: var(--mostaza);
+        }
+
+        .b5 {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .b6 {
+            grid-column: span 2;
+            grid-row: span 1;
+            background: var(--menta);
+            color: var(--crema);
+            border-color: var(--menta);
+        }
+
+        .b6 p {
+            color: #D3E6E1;
+        }
+
+        @media(max-width:900px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: auto;
+            }
+
+            .b1,
+            .b2,
+            .b3,
+            .b4,
+            .b5,
+            .b6 {
+                grid-column: span 2 !important;
+                grid-row: auto !important;
+            }
+        }
+
+        @media(max-width:520px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .b1,
+            .b2,
+            .b3,
+            .b4,
+            .b5,
+            .b6 {
+                grid-column: span 1 !important;
+            }
+        }
+
+        /* ===== franja de costumbre ===== */
+        section.costumbre {
+            background: var(--tinta);
+            color: var(--crema);
+            padding: 70px 6vw;
+            border-radius: 34px;
+            max-width: 1180px;
+            margin: 0 auto 80px;
+        }
+
+        .costumbre-wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .costumbre-wrap h2 {
+            font-size: 1.7rem;
+            margin-top: 0;
+            color: var(--mostaza);
+        }
+
+        .costumbre-item {
+            margin-bottom: 20px;
+            clip-path: inset(0 100% 0 0);
+            transition: opacity 0.6s ease, clip-path 0.6s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .costumbre-item.visible {
+            opacity: 1;
+            clip-path: inset(0 0% 0 0);
+        }
+
+        .costumbre-item h3 {
+            font-size: 1rem;
+            margin: 0 0 4px;
+            font-weight: 600;
+        }
+
+        .costumbre-item p {
+            font-size: 0.9rem;
+            color: #D8CFC0;
+            margin: 0;
+        }
+
+        @media(max-width:760px) {
+            .costumbre-wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== sucursales ===== */
+        section.locales {
+            max-width: 1180px;
+            margin: 0 auto 80px;
+            padding: 0 6vw;
+        }
+
+        section.locales h2 {
+            font-size: 1.9rem;
+            margin-bottom: 30px;
+        }
+
+        .locales-fila {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .local-card {
+            flex: 1 1 260px;
+            border: 2px solid var(--tinta);
+            border-radius: 22px;
+            text-decoration: none;
+            padding: 22px;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s ease, color 0.2s ease;
+        }
+
+        .local-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .local-card:hover {
+            background: var(--tinta);
+            color: var(--crema);
+        }
+
+        .local-card h3 {
+            font-size: 1.05rem;
+            margin: 0 0 8px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+        }
+
+        .local-card p {
+            font-size: 0.88rem;
+            color: #5a4f3d;
+            margin: 0 0 4px;
+        }
+
+        .local-card:hover p {
+            color: #D8CFC0;
+        }
+
+        footer {
+            padding: 40px 6vw 26px;
+            font-size: 0.88rem;
+            color: #5a4f3d;
+        }
+
+        .footer-wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        footer a {
+            color: var(--mandarina);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Café Hormiga</div>
+        <nav>
+            <a href="#bento">Carta</a>
+            <a href="#locales">Sucursales</a>
+            <a href="#pie">Contacto</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-top">
+            <div class="hero-headline">
+                <h1>Café que se<br><em>toma en serio.</em></h1>
+                <p>Café de especialidad tostado en Palermo, hecho para tomar tranquilo,
+                    arrancar el día o cortar la tarde. Espresso, filtro, algo dulce y
+                    siempre una buena excusa para quedarse un rato más.</p>
+                <div class="flex">
+                    <a class="btn full" href="#bento">Ver la carta</a>
+                    <a class="btn line" href="#pie">Encontrá tu sucursal</a>
+                </div>
+            </div>
+            <div class="hero-side">
+                <div class="card-color menta" data-target="7">
+                    <div class="num">0</div>
+                    <div class="label">orígenes que pasan por la barra</div>
+                </div>
+                <div class="card-color lila" data-target="8" data-pad="2">
+                    <div class="num">00</div>
+                    <div class="label">años haciendo café</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bento" id="bento">
+        <h2>Lo que se pide</h2>
+        <p class="sub">
+            Café de especialidad, cosas ricas hechas todos los días y algunos clásicos
+            que no necesitan presentación.
+        </p>
+        <div class="bento-grid">
+            <div class="bento-item b1">
+                <h3>Flat white</h3>
+                <p>Espresso doble, leche texturizada y una espuma fina para un café intenso pero bien equilibrado.</p>
+                <span class="precio">$3.200</span>
+            </div>
+
+            <div class="bento-item b2">
+                <h3>Iced latte</h3>
+                <p>Espresso doble, leche fría y hielo. Cremoso, fresco y fácil de tomar.</p>
+                <span class="precio">$3.400</span>
+            </div>
+
+            <div class="bento-item b3">
+                <h3>Cold brew</h3>
+                <p>Café extraído en frío durante 12 horas. Refrescante, suave y con un final ligeramente dulce.</p>
+                <span class="precio">$3.600</span>
+            </div>
+
+            <div class="bento-item b4">
+                <h3>Medialunas x2</h3>
+                <p>Dos medialunas de manteca, doradas por fuera y tiernas por dentro.</p>
+                <span class="precio">$1.900</span>
+            </div>
+
+            <div class="bento-item b5">
+                <h3>Chipá</h3>
+                <p>Recién horneado, crocante por fuera y bien cargado de queso</p>
+                <span class="precio">$2.100</span>
+            </div>
+
+            <div class="bento-item b6">
+                <h3>Café de filtro</h3>
+                <p>Preparado para resaltar las notas y aromas de cada origen.</p>
+                <span class="precio">$2.900</span>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="locales" id="locales">
+        <h2>Dónde encontrarnos</h2>
+        <div class="locales-fila">
+            <a class="local-card"
+                href="https://www.google.com/maps/search/?api=1&query=Gorriti+4680,+Palermo,+Buenos+Aires">
+                <h3>Palermo Hollywood</h3>
+                <p>Gorriti 4680</p>
+                <p>Lunes a domingo, 8 a 20 hs</p>
+            </a>
+            <div class="local-card">
+                <h3>Chacarita</h3>
+                <p>Av. Corrientes 6210</p>
+                <p>Lunes a sábado, 8 a 19 hs</p>
+            </div>
+            <div class="local-card">
+                <h3>Villa Crespo</h3>
+                <p>Malabia 1120</p>
+                <p>Todos los días, 8 a 21 hs</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="pie">
+        <div class="footer-wrap">
+            <div>Café Hormiga — tostadero propio</div>
+            <div><a href="#">Pedidos por WhatsApp: 11 3344-9021</a></div>
+        </div>
+    </footer>
+
+    <script>
+        // hero: tarjetas laterales entran + contador de números
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.card-color').forEach(card => {
+                card.classList.add('entra');
+                const target = parseInt(card.dataset.target, 10);
+                const pad = parseInt(card.dataset.pad || '1', 10);
+                const numEl = card.querySelector('.num');
+                const delay = card.classList.contains('lila') ? 550 : 350;
+                setTimeout(() => {
+                    let current = 0;
+                    const step = () => {
+                        current++;
+                        numEl.textContent = String(current).padStart(pad, '0');
+                        if (current < target) requestAnimationFrame(() => setTimeout(step, 90));
+                    };
+                    step();
+                }, delay);
+            });
+        });
+
+        // resto de secciones: revelado al hacer scroll, staggered por grupo
+        const grupos = [
+            { selector: '.bento-item', stagger: 70 },
+            { selector: '.costumbre-item', stagger: 120 },
+            { selector: '.local-card', stagger: 100 }
+        ];
+        grupos.forEach(({ selector, stagger }) => {
+            const nodos = document.querySelectorAll(selector);
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const i = Array.from(nodos).indexOf(entry.target);
+                        setTimeout(() => entry.target.classList.add('visible'), i * stagger);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            nodos.forEach(n => obs.observe(n));
+        });
+    </script>
+
+</body>
+
+</html>

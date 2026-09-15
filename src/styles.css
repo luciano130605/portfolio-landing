@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0c0c0b;
+  --color-surface: #141413;
+  --color-card: #121212;
+  --color-fg: #f3efe6;
+  --color-muted: #9a958c;
+  --color-subtle: #6e6b64;
+  --color-line: color-mix(in oklab, var(--color-fg) 10%, transparent);
+  --color-chip: #1a1a1a;
+  --color-chip-line: #2a2a2a;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
+
+  --text-kicker: 0.6875rem;
+  --text-display: clamp(4.25rem, 12vw, 8.25rem);
+  --text-section: clamp(2.5rem, 5.2vw, 4.15rem);
+  --text-card-title: clamp(1.65rem, 2.4vw, 2.15rem);
+
+  --tracking-kicker: 0.16em;
+  --tracking-display: -0.035em;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-card: 22px;
+  --radius-chip: 9999px;
+
+  --shadow-border: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-border-hover: 0 0 0 1px rgba(255, 255, 255, 0.14);
+  --shadow-chip: 0 0 0 1px rgba(255, 255, 255, 0.1);
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --aspect-photo: 16 / 10;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+}
+
+@layer utilities {
+  .rise {
+    animation: rise 700ms var(--ease-soft) both;
+  }
+
+  .delay-1 {
+    animation-delay: 70ms;
+  }
+
+  .delay-2 {
+    animation-delay: 140ms;
+  }
+
+  .delay-3 {
+    animation-delay: 210ms;
+  }
+
+  .delay-4 {
+    animation-delay: 280ms;
+  }
+
+  .delay-5 {
+    animation-delay: 350ms;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise,
+  .delay-1,
+  .delay-2,
+  .delay-3,
+  .delay-4,
+  .delay-5 {
+    animation: none !important;
+  }
+}

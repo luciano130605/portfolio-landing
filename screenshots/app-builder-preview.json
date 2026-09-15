@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Luciano de la Peña — Desarrollo web",
+      "hasCanvas": false,
+      "bodyTextLen": 4315,
+      "bodyTextHash": "2171e7b4247106713a5d28a211d92f7727c8a72aafa6c520d11a765df904f8b4",
+      "bodyTextPrefix": "Luciano de la Peña 01 Inicio 02 Proyectos 03 Plantillas 04 Servi",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Luciano de la Peña — Desarrollo web",
+      "hasCanvas": false,
+      "bodyTextLen": 4225,
+      "bodyTextHash": "e73eae326a848d8642d0ea24efb16848197cd47b38fc87238e29fcc86e3489e9",
+      "bodyTextPrefix": "Luciano de la Peña EN de la Peña Estudiante de Desarrollo de Sof",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

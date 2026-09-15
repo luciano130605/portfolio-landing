@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pomelo — Heladería artesanal en Buenos Aires. Fruta de estación, leche de tambo y cero saborizantes. 30 sabores reales.">
+    <meta name="theme-color" content="#ff5c5c">
+    <title>Pomelo — Heladería artesanal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            --frutilla: #ff5c5c;
+            --pistacho: #7cb96f;
+            --limon: #ffcb3d;
+            --uva: #6b4ba3;
+            --crema: #fff6ea;
+            --tinta: #23201d;
+            --tinta-soft: #4a453e;
+            --shadow-hard: 6px 6px 0 rgba(35, 32, 29, 0.14);
+            --shadow-hard-lg: 10px 10px 0 rgba(35, 32, 29, 0.12);
+            --radius-pill: 40px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--crema);
+            color: var(--tinta);
+            font-family: 'Work Sans', sans-serif;
+            line-height: 1.55;
+            overflow-x: hidden;
+        }
+
+        .display {
+            font-family: 'Bungee', sans-serif;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Focus visible para accesibilidad */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--limon);
+            outline-offset: 3px;
+        }
+
+        /* ---------- NAV ---------- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 5vw;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 246, 234, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 3px solid transparent;
+            transition: border-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        nav.scrolled {
+            border-bottom-color: var(--tinta);
+            padding: 14px 5vw;
+            box-shadow: 0 4px 20px rgba(35, 32, 29, 0.06);
+        }
+
+        .brand {
+            font-family: 'Bungee', sans-serif;
+            font-size: 22px;
+            color: var(--frutilla);
+            letter-spacing: 0.02em;
+            z-index: 2;
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 32px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .navlinks a {
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .navlinks a:hover {
+            color: var(--frutilla);
+        }
+
+        .navlinks a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 0;
+            height: 3px;
+            background: var(--pistacho);
+            transition: width 0.25s ease;
+        }
+
+        .navlinks a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--tinta);
+            color: var(--crema);
+            padding: 12px 24px;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 14px;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            z-index: 2;
+        }
+
+        .nav-cta:hover {
+            background: var(--frutilla);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hard);
+        }
+
+        /* Hamburger */
+        .menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border: 3px solid var(--tinta);
+            border-radius: 12px;
+            background: var(--crema);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 2;
+            transition: background 0.2s ease;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 18px;
+            height: 2.5px;
+            background: var(--tinta);
+            border-radius: 2px;
+            transition: transform 0.25s ease, opacity 0.2s ease;
+        }
+
+        .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(7.5px) rotate(45deg);
+        }
+
+        .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-7.5px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--crema);
+            z-index: 90;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            font-size: 22px;
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu a {
+            transition: color 0.2s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--frutilla);
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 36px 5vw 0;
+        }
+
+        .stripes {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: repeating-linear-gradient(-8deg, var(--limon) 0 56px, #ffd85e 56px 112px);
+            opacity: 0.32;
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        .hero-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            align-items: center;
+            padding-bottom: 48px;
+        }
+
+        .hero-copy {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: riseIn 0.65s ease forwards;
+            animation-delay: 0.05s;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--tinta);
+            color: var(--crema);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 7px 14px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-badge span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--limon);
+            display: inline-block;
+            animation: pulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.25); opacity: 0.7; }
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6.2vw, 78px);
+            margin-bottom: 22px;
+            letter-spacing: -0.01em;
+        }
+
+        .hero h1 .c1 { color: var(--frutilla); }
+        .hero h1 .c2 { color: var(--pistacho); }
+        .hero h1 .c3 { color: var(--uva); }
+
+        .hero p {
+            font-size: 17.5px;
+            max-width: 420px;
+            margin-bottom: 32px;
+            color: var(--tinta-soft);
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: var(--frutilla);
+            color: #fff;
+            padding: 16px 32px;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 15px;
+            display: inline-block;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--uva);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hard);
+        }
+
+        .btn-text {
+            font-weight: 700;
+            font-size: 15px;
+            border-bottom: 3px solid var(--pistacho);
+            padding-bottom: 3px;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-text:hover {
+            color: var(--frutilla);
+            border-color: var(--frutilla);
+        }
+
+        /* Scoops */
+        .scoops {
+            position: relative;
+            height: 380px;
+            opacity: 0;
+            animation: riseIn 0.7s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .scoop {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Bungee', sans-serif;
+            color: #fff;
+            font-size: 13px;
+            padding: 12px;
+            box-shadow: 8px 8px 0 rgba(35, 32, 29, 0.16);
+            border: 3px solid var(--tinta);
+            opacity: 0;
+            transform: translateY(50px) scale(0.65);
+            animation: dropIn 0.75s cubic-bezier(.34, 1.56, .64, 1) forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+            user-select: none;
+        }
+
+        .scoop:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 10px 14px 0 rgba(35, 32, 29, 0.18);
+            z-index: 5;
+        }
+
+        .s1 {
+            width: 180px;
+            height: 180px;
+            background: var(--frutilla);
+            top: 0;
+            left: 50px;
+            animation-delay: 0.2s;
+            font-size: 14px;
+        }
+
+        .s2 {
+            width: 158px;
+            height: 158px;
+            background: var(--pistacho);
+            top: 110px;
+            left: 230px;
+            animation-delay: 0.42s;
+        }
+
+        .s3 {
+            width: 138px;
+            height: 138px;
+            background: var(--uva);
+            top: 230px;
+            left: 80px;
+            animation-delay: 0.64s;
+        }
+
+        .scoop-deco {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid var(--tinta);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .scoop-deco.d1 {
+            width: 90px;
+            height: 90px;
+            background: var(--limon);
+            top: 40px;
+            right: 20px;
+        }
+
+        .scoop-deco.d2 {
+            width: 48px;
+            height: 48px;
+            background: var(--frutilla);
+            bottom: 30px;
+            right: 60px;
+        }
+
+        @keyframes dropIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.65);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------- MARQUEE ---------- */
+        .strip {
+            background: var(--tinta);
+            color: var(--crema);
+            padding: 20px 0;
+            overflow: hidden;
+            border-top: 3px solid var(--tinta);
+            border-bottom: 3px solid var(--tinta);
+        }
+
+        .strip-track {
+            display: flex;
+            gap: 48px;
+            white-space: nowrap;
+            width: max-content;
+            font-family: 'Bungee', sans-serif;
+            font-size: 17px;
+            letter-spacing: 0.04em;
+            animation: scroll 22s linear infinite;
+        }
+
+        .strip:hover .strip-track {
+            animation-play-state: paused;
+        }
+
+        .strip-track span {
+            display: inline-flex;
+            align-items: center;
+            gap: 48px;
+        }
+
+        .strip-track span::after {
+            content: '•';
+            color: var(--limon);
+            font-size: 14px;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* ---------- SABORES ---------- */
+        .sabores {
+            padding: 100px 5vw 80px;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .sabores-head {
+            text-align: center;
+            max-width: 560px;
+            margin: 0 auto 56px;
+        }
+
+        .sabores-head h2 {
+            font-size: clamp(30px, 3.8vw, 46px);
+            margin-bottom: 14px;
+            line-height: 1.15;
+        }
+
+        .sabores-head p {
+            color: var(--tinta-soft);
+            font-size: 16px;
+        }
+
+        .sabor-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        .sabor-card {
+            text-align: center;
+            padding: 28px 12px 24px;
+            border: 3px solid var(--tinta);
+            border-radius: 50% 50% 16px 16px;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .sabor-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sabor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hard);
+        }
+
+        .sabor-card:nth-child(1) { background: #ffe1e1; }
+        .sabor-card:nth-child(2) { background: #ffe9c2; }
+        .sabor-card:nth-child(3) { background: #dcefd4; }
+        .sabor-card:nth-child(4) { background: #e6ddf5; }
+        .sabor-card:nth-child(5) { background: #fff2c8; }
+
+        .sabor-dot {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            border: 3px solid var(--tinta);
+            box-shadow: 4px 4px 0 rgba(35, 32, 29, 0.12);
+        }
+
+        .sabor-card:nth-child(1) .sabor-dot { background: var(--frutilla); }
+        .sabor-card:nth-child(2) .sabor-dot { background: #e8a54b; }
+        .sabor-card:nth-child(3) .sabor-dot { background: var(--pistacho); }
+        .sabor-card:nth-child(4) .sabor-dot { background: var(--limon); }
+        .sabor-card:nth-child(5) .sabor-dot { background: #5c3d2e; }
+
+        .sabor-card h4 {
+            font-size: 15.5px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sabor-card p {
+            font-size: 12.5px;
+            color: #5c574f;
+        }
+
+        /* ---------- FEATURE ---------- */
+        .feature {
+            padding: 20px 5vw 70px;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .feature-inner {
+            border: 3px solid var(--tinta);
+            border-radius: 32px;
+            background: #fff;
+            box-shadow: var(--shadow-hard-lg);
+            padding: 52px 48px;
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-inner::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -30px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: var(--limon);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .feature-inner::after {
+            content: '';
+            position: absolute;
+            bottom: -24px;
+            right: 70px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--frutilla);
+            opacity: 0.22;
+            pointer-events: none;
+        }
+
+        .feature-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-copy .tag {
+            display: inline-block;
+            font-family: 'Bungee', sans-serif;
+            font-size: 12px;
+            color: var(--frutilla);
+            margin-bottom: 14px;
+            letter-spacing: 0.04em;
+        }
+
+        .feature-copy h2 {
+            font-family: 'Bungee', sans-serif;
+            font-size: clamp(24px, 3vw, 34px);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .feature-copy p {
+            color: var(--tinta-soft);
+            font-size: 15.5px;
+            max-width: 420px;
+            line-height: 1.6;
+        }
+
+        .feature-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-stats div {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 16px 20px;
+            border: 3px solid var(--tinta);
+            border-radius: 18px;
+            background: var(--crema);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .feature-stats div:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hard);
+        }
+
+        .feature-stats div:nth-child(1) { background: #ffe1e1; }
+        .feature-stats div:nth-child(2) { background: #dcefd4; }
+        .feature-stats div:nth-child(3) { background: #fff2c8; }
+
+        .feature-stats strong {
+            font-family: 'Bungee', sans-serif;
+            font-size: 28px;
+            color: var(--tinta);
+            line-height: 1;
+        }
+
+        .feature-stats span {
+            font-size: 13.5px;
+            color: var(--tinta-soft);
+            font-weight: 600;
+        }
+
+        /* ---------- LLEGAR ---------- */
+        .llegar {
+            padding: 80px 5vw 90px;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .llegar-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .llegar-head h2 {
+            font-size: clamp(30px, 3.8vw, 44px);
+            max-width: 500px;
+            line-height: 1.15;
+        }
+
+        .llegar-head p {
+            color: var(--tinta-soft);
+            font-size: 15px;
+            max-width: 320px;
+        }
+
+        .loc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .loc-card {
+            border: 3px solid var(--tinta);
+            border-radius: 24px;
+            overflow: hidden;
+            background: #fff;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.25s ease;
+            display: block;
+        }
+
+        .loc-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .loc-card:hover {
+            box-shadow: var(--shadow-hard);
+            transform: translateY(-6px);
+        }
+
+        .loc-map {
+            height: 140px;
+            position: relative;
+        }
+
+        .loc-card:nth-child(1) .loc-map { background: #ffe1e1; }
+        .loc-card:nth-child(2) .loc-map { background: #dcefd4; }
+        .loc-card:nth-child(3) .loc-map { background: #e6ddf5; }
+
+        .loc-map svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .loc-body {
+            padding: 22px;
+        }
+
+        .loc-body .n {
+            font-family: 'Bungee', sans-serif;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .loc-body .addr {
+            font-size: 14.5px;
+            color: var(--tinta-soft);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .loc-body .h {
+            font-size: 13px;
+            color: #7c766b;
+            margin-bottom: 18px;
+        }
+
+        .loc-go {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            border-bottom: 3px solid var(--frutilla);
+            padding-bottom: 2px;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .loc-card:hover .loc-go {
+            color: var(--uva);
+            border-color: var(--uva);
+        }
+
+        .loc-go svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ---------- LOCALES ---------- */
+        .locales {
+            background: var(--uva);
+            color: #fff;
+            padding: 88px 5vw;
+            border-radius: 40px;
+            max-width: 1180px;
+            margin: 20px auto 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            border: 3px solid var(--tinta);
+            box-shadow: 12px 12px 0 rgba(35, 32, 29, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .locales::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(255, 203, 61, 0.18);
+            pointer-events: none;
+        }
+
+        .locales h2 {
+            font-family: 'Bungee', sans-serif;
+            font-size: clamp(26px, 3.4vw, 38px);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .locales p {
+            opacity: 0.9;
+            font-size: 15.5px;
+            max-width: 400px;
+            margin-bottom: 28px;
+            line-height: 1.55;
+        }
+
+        .locales .btn-primary {
+            background: var(--limon);
+            color: var(--tinta);
+        }
+
+        .locales .btn-primary:hover {
+            background: var(--frutilla);
+            color: #fff;
+        }
+
+        .loc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .loc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+            padding: 16px 0;
+            transition: padding-left 0.25s ease;
+        }
+
+        .loc-item:hover {
+            padding-left: 8px;
+        }
+
+        .loc-item:last-child {
+            border-bottom: none;
+        }
+
+        .loc-item .n {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .loc-item .h {
+            font-size: 14px;
+            opacity: 0.85;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        /* ---------- CTA ---------- */
+        .cta {
+            padding: 100px 5vw 90px;
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 420px;
+            height: 280px;
+            background: radial-gradient(ellipse, rgba(255, 203, 61, 0.25) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .cta h2 {
+            font-size: clamp(32px, 5vw, 54px);
+            margin-bottom: 16px;
+            position: relative;
+            line-height: 1.1;
+        }
+
+        .cta p {
+            color: var(--tinta-soft);
+            font-size: 16.5px;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .cta .btn-primary {
+            position: relative;
+            padding: 18px 36px;
+            font-size: 16px;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            border-top: 3px solid var(--tinta);
+            padding: 40px 5vw 32px;
+            background: #fff;
+        }
+
+        .footer-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-brand {
+            color: var(--frutilla);
+            font-family: 'Bungee', sans-serif;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .footer-copy {
+            font-size: 14px;
+            color: var(--tinta-soft);
+            max-width: 280px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .footer-links a {
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--frutilla);
+        }
+
+        .footer-bottom {
+            max-width: 1180px;
+            margin: 28px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(35, 32, 29, 0.1);
+            font-size: 13px;
+            color: #7c766b;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .strip-track,
+            .scoop,
+            .hero-copy,
+            .scoops {
+                animation: none !important;
+            }
+
+            .scoop,
+            .hero-copy,
+            .scoops {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .sabor-card,
+            .loc-card {
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .hero-badge span {
+                animation: none !important;
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 980px) {
+            .sabor-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 860px) {
+            .navlinks {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .scoops {
+                height: 300px;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+
+            .s1 { left: 30px; }
+            .s2 { left: 190px; }
+
+            .sabor-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .feature-inner {
+                grid-template-columns: 1fr;
+                border-radius: 26px;
+                padding: 36px 28px;
+                gap: 28px;
+            }
+
+            .feature-stats {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .feature-stats div {
+                flex: 1;
+                min-width: 100px;
+            }
+
+            .locales {
+                grid-template-columns: 1fr;
+                padding: 52px 28px;
+                border-radius: 28px;
+            }
+
+            .loc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .llegar-head {
+                align-items: flex-start;
+            }
+
+            .llegar {
+                padding: 60px 5vw 70px;
+            }
+
+            .sabores {
+                padding: 70px 5vw 50px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .hero {
+                padding: 24px 5vw 0;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-primary,
+            .btn-text {
+                text-align: center;
+            }
+
+            .btn-text {
+                border-bottom: none;
+                padding: 12px;
+                border: 3px solid var(--tinta);
+                border-radius: var(--radius-pill);
+            }
+
+            .scoops {
+                height: 260px;
+            }
+
+            .s1 {
+                width: 140px;
+                height: 140px;
+                font-size: 12px;
+                left: 10px;
+            }
+
+            .s2 {
+                width: 120px;
+                height: 120px;
+                left: 150px;
+                top: 90px;
+            }
+
+            .s3 {
+                width: 110px;
+                height: 110px;
+                top: 180px;
+                left: 40px;
+            }
+
+            .sabor-grid {
+                grid-template-columns: 1fr;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            .sabor-card {
+                border-radius: 40% 40% 16px 16px;
+            }
+
+            .cta {
+                padding: 70px 5vw 60px;
+            }
+
+            .cta .btn-primary {
+                width: 100%;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav id="site-nav">
+        <div class="brand">POMELO</div>
+        <div class="navlinks">
+            <a href="#sabores">Sabores</a>
+            <a href="#llegar">Cómo llegar</a>
+            <a href="#locales">Locales</a>
+        </div>
+        <a href="#cta" class="nav-cta">Pedir ahora</a>
+        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#sabores">Sabores</a>
+        <a href="#llegar">Cómo llegar</a>
+        <a href="#locales">Locales</a>
+        <a href="#cta" class="nav-cta" style="margin-top: 12px;">Pedir ahora</a>
+    </div>
+
+    <section class="hero">
+        <div class="stripes"></div>
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <div class="hero-badge"><span></span> Artesanal · Sin saborizantes</div>
+                <h1 class="display"><span class="c1">HELADO</span><br>DE <span class="c2">VER</span><span class="c3">DAD</span></h1>
+                <p>Fruta de estación, leche de tambo y cero saborizantes. Treinta sabores, y ninguno viene de un sobre.</p>
+                <div class="hero-actions">
+                    <a href="#cta" class="btn-primary">Pedir delivery</a>
+                    <a href="#sabores" class="btn-text">Ver los 30 sabores</a>
+                </div>
+            </div>
+            <div class="scoops" aria-hidden="true">
+                <div class="scoop-deco d1"></div>
+                <div class="scoop-deco d2"></div>
+                <div class="scoop s1">Frutilla<br>a la crema</div>
+                <div class="scoop s2">Pistacho</div>
+                <div class="scoop s3">Dulce<br>de leche</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="strip" aria-hidden="true">
+        <div class="strip-track">
+            <span>FRUTILLA</span><span>PISTACHO</span><span>DULCE DE LECHE</span><span>LIMÓN</span><span>CHOCOLATE 70%</span>
+            <span>FRUTILLA</span><span>PISTACHO</span><span>DULCE DE LECHE</span><span>LIMÓN</span><span>CHOCOLATE 70%</span>
+        </div>
+    </div>
+
+    <section class="sabores" id="sabores">
+        <div class="sabores-head">
+            <h2 class="display">Los cinco que más se piden esta semana.</h2>
+            <p>La carta completa cambia según lo que llega fresco del mercado.</p>
+        </div>
+        <div class="sabor-grid">
+            <div class="sabor-card">
+                <div class="sabor-dot"></div>
+                <h4>Frutilla a la crema</h4>
+                <p>Fruta de estación</p>
+            </div>
+            <div class="sabor-card">
+                <div class="sabor-dot"></div>
+                <h4>Dulce de leche</h4>
+                <p>Repostero, bien espeso</p>
+            </div>
+            <div class="sabor-card">
+                <div class="sabor-dot"></div>
+                <h4>Pistacho</h4>
+                <p>Sin colorante</p>
+            </div>
+            <div class="sabor-card">
+                <div class="sabor-dot"></div>
+                <h4>Limón</h4>
+                <p>Al agua, bien cítrico</p>
+            </div>
+            <div class="sabor-card">
+                <div class="sabor-dot"></div>
+                <h4>Chocolate 70%</h4>
+                <p>Cacao de origen único</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature">
+        <div class="feature-inner">
+            <div class="feature-copy">
+                <div class="tag">SIN SOBRE · SIN SABORIZANTES</div>
+                <h2>Fruta de estación, leche de tambo y cero saborizantes.</h2>
+                <p>Treinta sabores, y ninguno viene de un sobre. La carta cambia según lo que llega fresco del mercado.</p>
+            </div>
+            <div class="feature-stats">
+                <div>
+                    <strong>30</strong>
+                    <span>sabores</span>
+                </div>
+                <div>
+                    <strong>3</strong>
+                    <span>locales</span>
+                </div>
+                <div>
+                    <strong>0</strong>
+                    <span>saborizantes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="llegar" id="llegar">
+        <div class="llegar-head">
+            <h2 class="display">Encontranos. Está más cerca de lo que pensás.</h2>
+            <p>Tocá un local para abrir la ruta en Google Maps desde donde estés.</p>
+        </div>
+        <div class="loc-grid">
+            <a class="loc-card"
+                href="https://www.google.com/maps/dir/?api=1&destination=Heladeria+Pomelo+Palermo+Buenos+Aires"
+                target="_blank" rel="noopener">
+                <div class="loc-map">
+                    <svg viewBox="0 0 300 140" preserveAspectRatio="none" aria-hidden="true">
+                        <line x1="0" y1="32" x2="300" y2="32" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.2" />
+                        <line x1="0" y1="100" x2="300" y2="100" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.2" />
+                        <line x1="90" y1="0" x2="90" y2="140" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.18" />
+                        <line x1="220" y1="0" x2="220" y2="140" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.18" />
+                        <circle cx="150" cy="65" r="11" fill="#ff5c5c" stroke="#23201d" stroke-width="2.5" />
+                        <circle cx="150" cy="65" r="3.5" fill="#fff" />
+                    </svg>
+                </div>
+                <div class="loc-body">
+                    <div class="n">Palermo</div>
+                    <div class="addr">Av. Costa Rica 4890</div>
+                    <div class="h">12 a 00 hs</div>
+                    <span class="loc-go">Cómo llegar
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </span>
+                </div>
+            </a>
+            <a class="loc-card"
+                href="https://www.google.com/maps/dir/?api=1&destination=Heladeria+Pomelo+Belgrano+Buenos+Aires"
+                target="_blank" rel="noopener">
+                <div class="loc-map">
+                    <svg viewBox="0 0 300 140" preserveAspectRatio="none" aria-hidden="true">
+                        <line x1="0" y1="48" x2="300" y2="48" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.2" />
+                        <line x1="0" y1="105" x2="300" y2="105" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.2" />
+                        <line x1="60" y1="0" x2="60" y2="140" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.18" />
+                        <line x1="200" y1="0" x2="200" y2="140" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.18" />
+                        <circle cx="130" cy="70" r="11" fill="#7cb96f" stroke="#23201d" stroke-width="2.5" />
+                        <circle cx="130" cy="70" r="3.5" fill="#fff" />
+                    </svg>
+                </div>
+                <div class="loc-body">
+                    <div class="n">Belgrano</div>
+                    <div class="addr">Av. Cabildo 2140</div>
+                    <div class="h">12 a 23 hs</div>
+                    <span class="loc-go">Cómo llegar
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </span>
+                </div>
+            </a>
+            <a class="loc-card"
+                href="https://www.google.com/maps/dir/?api=1&destination=Heladeria+Pomelo+Caballito+Buenos+Aires"
+                target="_blank" rel="noopener">
+                <div class="loc-map">
+                    <svg viewBox="0 0 300 140" preserveAspectRatio="none" aria-hidden="true">
+                        <line x1="0" y1="38" x2="300" y2="38" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.2" />
+                        <line x1="0" y1="95" x2="300" y2="95" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.2" />
+                        <line x1="110" y1="0" x2="110" y2="140" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.18" />
+                        <line x1="240" y1="0" x2="240" y2="140" stroke="#23201d" stroke-width="2.5" stroke-opacity="0.18" />
+                        <circle cx="170" cy="60" r="11" fill="#6b4ba3" stroke="#23201d" stroke-width="2.5" />
+                        <circle cx="170" cy="60" r="3.5" fill="#fff" />
+                    </svg>
+                </div>
+                <div class="loc-body">
+                    <div class="n">Caballito</div>
+                    <div class="addr">Av. Rivadavia 5230</div>
+                    <div class="h">13 a 22 hs</div>
+                    <span class="loc-go">Cómo llegar
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="locales" id="locales">
+        <div>
+            <h2>Tres locales abiertos todos los días del año.</h2>
+            <p>Y si no llegás, te lo llevamos en menos de cuarenta minutos.</p>
+            <a href="#cta" class="btn-primary">Ver el menú completo</a>
+        </div>
+        <div class="loc-list">
+            <div class="loc-item"><span class="n">Palermo</span><span class="h">12 a 00 hs</span></div>
+            <div class="loc-item"><span class="n">Belgrano</span><span class="h">12 a 23 hs</span></div>
+            <div class="loc-item"><span class="n">Caballito</span><span class="h">13 a 22 hs</span></div>
+        </div>
+    </section>
+
+    <section class="cta" id="cta">
+        <h2 class="display">¿Ya elegiste el sabor de hoy?</h2>
+        <p>Pedilo por delivery o pasá directo por el local más cercano.</p>
+        <a href="#" class="btn-primary">Pedir delivery</a>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand">POMELO</div>
+                <p class="footer-copy">Heladería artesanal. Fruta real, leche de tambo y cero saborizantes.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#sabores">Sabores</a>
+                <a href="#llegar">Cómo llegar</a>
+                <a href="#locales">Locales</a>
+                <a href="#cta">Pedir</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>Buenos Aires · Argentina</span>
+            <span>© 2026 Pomelo Heladería</span>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var targets = document.querySelectorAll('.sabor-card, .loc-card');
+            var nav = document.getElementById('site-nav');
+            var menuToggle = document.getElementById('menu-toggle');
+            var mobileMenu = document.getElementById('mobile-menu');
+
+            // Nav scroll effect
+            if (nav) {
+                window.addEventListener('scroll', function () {
+                    nav.classList.toggle('scrolled', window.scrollY > 16);
+                }, { passive: true });
+            }
+
+            // Mobile menu
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function () {
+                    var isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+                    menuToggle.setAttribute('aria-expanded', !isOpen);
+                    menuToggle.setAttribute('aria-label', isOpen ? 'Abrir menú' : 'Cerrar menú');
+                    mobileMenu.classList.toggle('open', !isOpen);
+                    document.body.style.overflow = isOpen ? '' : 'hidden';
+                });
+
+                mobileMenu.querySelectorAll('a').forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                        menuToggle.setAttribute('aria-label', 'Abrir menú');
+                        mobileMenu.classList.remove('open');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+
+            // Intersection Observer
+            if (prefersReduced || !('IntersectionObserver' in window)) {
+                targets.forEach(function (el) { el.classList.add('in-view'); });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry, i) {
+                    if (entry.isIntersecting) {
+                        var delay = (i % 5) * 65;
+                        setTimeout(function () {
+                            entry.target.classList.add('in-view');
+                        }, delay);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.18, rootMargin: '0px 0px -30px 0px' });
+
+            targets.forEach(function (el) { observer.observe(el); });
+        })();
+    </script>
+
+</body>
+
+</html>
