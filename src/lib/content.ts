@@ -175,6 +175,7 @@ export const templates: Project[] = [
   },
     {
     id: "Barber",
+    featured: true,
     category: { es: "Página web · barberia", en: "Website · Food" },
     title: "Barberia",
     description: {
