@@ -173,6 +173,22 @@ export const templates: Project[] = [
     image: "/templates/parrilla/parrilla.png",
     live: "https://demo-parrilla.vercel.app/",
   },
+    {
+    id: "Barber",
+    category: { es: "Página web · barberia", en: "Website · Food" },
+    title: "Barberia",
+    description: {
+      es: "",
+      en: "",
+    },
+    bullets: [
+      { es: "", en: "" },
+
+    ],
+    tech: ["", "", ""],
+    image: "/templates/barber/barber.png",
+    live: "https://demo-barber-jv97.vercel.app/",
+  },
 ];
 
 export const templateNote: Copy = {
